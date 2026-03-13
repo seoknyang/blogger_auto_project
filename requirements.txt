@@ -1,0 +1,9 @@
+google-auth
+google-auth-oauthlib
+google-api-python-client
+anthropic
+feedparser
+python-telegram-bot>=20.0
+Pillow
+APScheduler
+python-dotenv
