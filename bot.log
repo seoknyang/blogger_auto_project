@@ -1525,3 +1525,6 @@ json.decoder.JSONDecodeError: Invalid control character at: line 7 column 1307 (
 2026-03-15 23:11:56,968 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
 2026-03-15 23:12:07,213 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
 2026-03-15 23:12:17,536 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 23:12:27,783 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 23:12:38,026 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 23:12:44,187 [INFO] __main__ - KeyboardInterrupt - 종료

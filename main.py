@@ -14,6 +14,8 @@ logging.basicConfig(
         logging.FileHandler("bot.log", encoding="utf-8"),
     ],
 )
+# getUpdates 폴링 로그 제거
+logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 
