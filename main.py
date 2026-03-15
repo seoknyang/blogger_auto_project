@@ -3,7 +3,7 @@ import logging
 import signal
 import sys
 
-from scheduler import create_scheduler
+from scheduler import create_scheduler, run_daily_pipeline
 from bot.telegram_bot import build_application
 
 logging.basicConfig(
@@ -25,6 +25,11 @@ async def main():
     await app.initialize()
     await app.start()
     await app.updater.start_polling(drop_pending_updates=True)
+
+    # 즉시 테스트 실행 (--test 옵션)
+    if "--test" in sys.argv:
+        logger.info("테스트 모드: 파이프라인 즉시 실행")
+        await run_daily_pipeline()
 
     # 스케줄러 시작
     scheduler = create_scheduler()

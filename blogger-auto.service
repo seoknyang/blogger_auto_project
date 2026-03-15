@@ -1,0 +1,18 @@
+[Unit]
+Description=블로그 자동 포스팅 봇
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/blogger_auto_project
+ExecStart=/home/ubuntu/blogger_auto_project/venv/bin/python main.py
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

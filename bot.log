@@ -1,0 +1,15 @@
+2026-03-15 14:14:21,495 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 14:14:26,086 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 14:14:26,087 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 14:14:26,088 [INFO] telegram.ext.Application - Application started
+2026-03-15 14:14:26,325 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 14:14:26,329 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 14:14:26,329 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 14:14:26,360 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 14:14:26,361 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 14:14:26,361 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 14:14:37,147 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 14:14:47,482 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 14:14:57,822 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 14:15:08,170 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 14:15:13,511 [INFO] __main__ - KeyboardInterrupt - 종료
