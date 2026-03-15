@@ -1,8 +1,9 @@
 import os
+import base64
 import logging
-import textwrap
+import requests
 from PIL import Image, ImageDraw, ImageFont
-from config import FONT_PATH, THUMBNAILS_DIR
+from config import FONT_PATH, THUMBNAILS_DIR, IMGBB_API_KEY
 
 logger = logging.getLogger(__name__)
 
@@ -29,11 +30,19 @@ WIDTH, HEIGHT = 1200, 628
 PADDING = 60
 
 
+_FALLBACK_FONTS = [
+    FONT_PATH,
+    "C:/Windows/Fonts/malgunbd.ttf",   # 맑은 고딕 Bold (Windows 기본)
+    "C:/Windows/Fonts/malgun.ttf",     # 맑은 고딕 Regular
+    "C:/Windows/Fonts/gulim.ttc",      # 굴림
+]
+
+
 def _get_font(size: int) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-    if os.path.exists(FONT_PATH):
-        return ImageFont.truetype(FONT_PATH, size)
-    # 폰트 파일 없을 경우 기본 폰트 사용 (한글 깨짐 가능)
-    logger.warning(f"폰트 파일 없음: {FONT_PATH}, 기본 폰트 사용")
+    for path in _FALLBACK_FONTS:
+        if os.path.exists(path):
+            return ImageFont.truetype(path, size)
+    logger.warning("한글 폰트를 찾을 수 없음 - 기본 폰트 사용 (한글 깨짐)")
     return ImageFont.load_default()
 
 
@@ -104,6 +113,28 @@ def create_thumbnail(candidate: dict, output_path: str):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     img.save(output_path, "PNG")
     logger.info(f"썸네일 저장: {output_path}")
+
+
+def upload_to_imgbb(image_path: str) -> str | None:
+    """imgbb에 이미지 업로드 후 공개 URL 반환. 실패 시 None."""
+    if not IMGBB_API_KEY:
+        logger.warning("IMGBB_API_KEY 없음 - 이미지 업로드 건너뜀")
+        return None
+    try:
+        with open(image_path, "rb") as f:
+            encoded = base64.b64encode(f.read()).decode()
+        resp = requests.post(
+            "https://api.imgbb.com/1/upload",
+            data={"key": IMGBB_API_KEY, "image": encoded},
+            timeout=30,
+        )
+        resp.raise_for_status()
+        url = resp.json()["data"]["url"]
+        logger.info(f"imgbb 업로드 완료: {url}")
+        return url
+    except Exception as e:
+        logger.error(f"imgbb 업로드 실패: {e}")
+        return None
 
 
 def generate_thumbnails(candidates: list[dict]) -> list[dict]:

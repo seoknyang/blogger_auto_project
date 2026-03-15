@@ -36,14 +36,15 @@ def _build_keyboard(candidates: list[dict]) -> InlineKeyboardMarkup:
         InlineKeyboardButton(f"{c['id']}번 선택", callback_data=f"select_{c['id']}")
         for c in candidates
     ]
-    buttons.append(InlineKeyboardButton("오늘 건너뜀", callback_data="skip"))
-    # 후보 버튼 한 줄에 3개, 건너뜀 버튼 별도 줄
-    keyboard = [buttons[:-1], [buttons[-1]]]
-    return InlineKeyboardMarkup(keyboard)
+    skip_btn = InlineKeyboardButton("오늘 건너뜀", callback_data="skip")
+    # 2개씩 묶어서 2x2 그리드, 건너뜀 버튼 별도 줄
+    rows = [buttons[i:i+2] for i in range(0, len(buttons), 2)]
+    rows.append([skip_btn])
+    return InlineKeyboardMarkup(rows)
 
 
 async def send_candidates(candidates: list[dict]):
-    """PM 에이전트: 품질 검토 후 텔레그램으로 후보 3개 발송."""
+    """PM 에이전트: 품질 검토 후 텔레그램으로 후보 4개 발송 (IT 2개 + 경제 2개)."""
     passed = _quality_check(candidates)
     if not passed:
         logger.error("품질 통과 후보 없음")

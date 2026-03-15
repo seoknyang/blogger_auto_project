@@ -13,3 +13,1368 @@
 2026-03-15 14:14:57,822 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
 2026-03-15 14:15:08,170 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
 2026-03-15 14:15:13,511 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 18:39:31,644 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 18:39:33,297 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 18:39:33,330 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 18:39:33,330 [INFO] telegram.ext.Application - Application started
+2026-03-15 18:39:33,590 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 18:39:33,591 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 18:39:33,591 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 18:39:33,591 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 18:39:33,591 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 18:39:36,090 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 29개
+2026-03-15 18:39:36,122 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 18:39:36,122 [INFO] agents.content_writer - Claude API로 글 작성 시작
+2026-03-15 18:41:18,202 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 18:41:18,270 [INFO] agents.content_writer - 글 작성 완료: 3개
+2026-03-15 18:41:18,271 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 18:41:18,274 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:41:18,282 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:41:18,290 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:41:18,336 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 18:41:18,338 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:41:18,339 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:41:18,346 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:41:18,357 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 18:41:18,360 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:41:18,362 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:41:18,370 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:41:18,412 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 18:41:18,413 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 18:41:20,655 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 400 Bad Request"
+2026-03-15 18:41:20,686 [ERROR] scheduler - 파이프라인 오류: Chat not found
+Traceback (most recent call last):
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\scheduler.py", line 40, in run_daily_pipeline
+    await send_candidates(candidates)
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\agents\pm_agent.py", line 61, in send_candidates
+    await bot.send_photo(
+    ...<5 lines>...
+    )
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 1607, in send_photo
+    return await self._send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<22 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 819, in _send_message
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.BadRequest: Chat not found
+2026-03-15 18:41:20,701 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 18:41:20,701 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 18:41:20,702 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 18:41:20,702 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 18:41:20,702 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 18:41:30,083 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:41:40,344 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:41:50,601 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:42:00,858 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:42:11,120 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:42:21,375 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:42:31,727 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:42:41,985 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:42:52,280 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:43:02,658 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:43:13,102 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:43:23,541 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:43:33,883 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:43:44,238 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:43:54,573 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:44:04,917 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:44:15,266 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:44:25,524 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:44:35,836 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:44:46,239 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:44:56,828 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:45:07,174 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:45:17,524 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:45:27,783 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:45:38,107 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:45:48,366 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:45:58,683 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:46:09,032 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:46:19,289 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:46:29,616 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:46:39,959 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:46:50,297 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:47:00,643 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:47:10,977 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:47:21,327 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:47:31,653 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:47:42,011 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:47:52,354 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:48:02,694 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:48:12,955 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:48:23,282 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:48:33,548 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:48:43,862 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:48:54,213 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:49:04,544 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:49:14,807 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:49:25,067 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:49:35,370 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:49:45,632 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:49:55,951 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:50:06,297 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:50:16,638 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:50:26,947 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:50:37,319 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:50:47,669 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:50:57,928 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:51:05,402 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 18:52:32,942 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 18:52:34,170 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 18:52:34,172 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 18:52:34,172 [INFO] telegram.ext.Application - Application started
+2026-03-15 18:52:34,423 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 18:52:34,424 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 18:52:34,425 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 18:52:34,425 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 18:52:34,425 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 18:52:36,697 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 29개
+2026-03-15 18:52:36,698 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 18:52:36,698 [INFO] agents.content_writer - Claude API로 글 작성 시작
+2026-03-15 18:54:41,667 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 18:54:41,684 [INFO] agents.content_writer - 글 작성 완료: 3개
+2026-03-15 18:54:41,685 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 18:54:41,687 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:54:41,688 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:54:41,691 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:54:41,707 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 18:54:41,709 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:54:41,709 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:54:41,713 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:54:41,719 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 18:54:41,720 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:54:41,721 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:54:41,726 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 18:54:41,732 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 18:54:41,733 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 18:54:43,603 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 400 Bad Request"
+2026-03-15 18:54:43,604 [ERROR] scheduler - 파이프라인 오류: Chat not found
+Traceback (most recent call last):
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\scheduler.py", line 40, in run_daily_pipeline
+    await send_candidates(candidates)
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\agents\pm_agent.py", line 61, in send_candidates
+    await bot.send_photo(
+    ...<5 lines>...
+    )
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 1607, in send_photo
+    return await self._send_message(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<22 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 819, in _send_message
+    result = await self._post(
+             ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.BadRequest: Chat not found
+2026-03-15 18:54:43,611 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 18:54:43,612 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 18:54:43,612 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 18:54:43,612 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 18:54:43,612 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 18:54:53,028 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:55:03,365 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:55:13,712 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:55:24,056 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:55:34,395 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 18:55:44,350 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 18:58:04,248 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 18:58:05,585 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 18:58:05,586 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 18:58:05,587 [INFO] telegram.ext.Application - Application started
+2026-03-15 18:58:05,952 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 18:58:05,953 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 18:58:05,953 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 18:58:05,954 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 18:58:05,954 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 18:58:08,066 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 29개
+2026-03-15 18:58:08,066 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 18:58:08,066 [INFO] agents.content_writer - Claude API로 글 작성 시작
+2026-03-15 19:00:25,728 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 19:00:25,745 [ERROR] agents.content_writer - JSON 파싱 실패: Expecting ',' delimiter: line 8 column 1052 (char 1424)
+응답: [
+  {
+    "id": 1,
+    "title": "AI 시대 부모가 알아야 할 필수 디지털 교육 가이드: 우리 아이를 위한 AI 리터러시",
+    "category": "IT",
+    "keywords": ["AI 부모교육", "디지털 리터러시", "AI 시대 교육", "자녀 AI 교육", "스마트 육아"],
+    "preview": "AI가 일상 곳곳에 스며든 지금, 부모들은 어떻게 자녀를 교육해야 할까요? 단순히 스마트폰 사용 시간을 제한하는 것을 넘어, AI 기술을 올바르게 이해하고 활용할 수 있도록 돕는 것이 현대 부모의 핵심 역할이 되고 있습니다. 오늘은 AI 시대 부모가 반드시 알아야 할 디지털 교육의 모든 것을 정리해 드립니다.",
+    "content_html": "<h2>AI 시대, 왜 부모 교육이 먼저인가?</h2><p>경북 김천의 율곡도서관에서 학부모를 대상으로 AI 특강이 열렸다는 소식은 단순한 지역 행사를 넘어 우리 사회 전체가 직면한 교육적 
+2026-03-15 19:00:25,745 [ERROR] scheduler - 파이프라인 오류: Expecting ',' delimiter: line 8 column 1052 (char 1424)
+Traceback (most recent call last):
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\scheduler.py", line 28, in run_daily_pipeline
+    candidates = write(news_list)
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\agents\content_writer.py", line 78, in write
+    candidates = json.loads(response_text)
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\json\__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 8 column 1052 (char 1424)
+2026-03-15 19:00:25,780 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 19:00:25,781 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 19:00:25,781 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 19:00:25,781 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 19:00:25,781 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 19:00:36,590 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:00:46,927 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:00:57,281 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:01:07,621 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:01:17,955 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:01:28,210 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:01:38,467 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:01:43,258 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 19:02:30,222 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 19:02:31,570 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 19:02:31,571 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 19:02:31,571 [INFO] telegram.ext.Application - Application started
+2026-03-15 19:02:31,820 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 19:02:31,821 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 19:02:31,821 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 19:02:31,821 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 19:02:31,821 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 19:02:33,399 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 29개
+2026-03-15 19:02:33,399 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 19:02:33,399 [INFO] agents.content_writer - Claude API로 글 작성 시작
+2026-03-15 19:02:33,612 [INFO] agents.content_writer - 글 작성 중 [1/3]...
+2026-03-15 19:03:23,408 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 19:03:23,427 [INFO] agents.content_writer - 글 1 완료: 넷플릭스 AI 전면 도입, 한국 콘텐츠 제작 현장에 미
+2026-03-15 19:03:23,427 [INFO] agents.content_writer - 글 작성 중 [2/3]...
+2026-03-15 19:04:36,217 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 19:04:36,219 [INFO] agents.content_writer - 글 2 완료: 북한의 AI 위장 취업 실태 완전 분석: IT 기업이 
+2026-03-15 19:04:36,219 [INFO] agents.content_writer - 글 작성 중 [3/3]...
+2026-03-15 19:05:37,859 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 19:05:37,861 [INFO] agents.content_writer - 글 3 완료: AI 농업 혁명: 미국 농가 농약 비용 80% 절감 성
+2026-03-15 19:05:37,861 [INFO] agents.content_writer - 글 작성 완료: 3개
+2026-03-15 19:05:37,861 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 19:05:37,863 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:05:37,864 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:05:37,868 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:05:37,885 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 19:05:37,886 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:05:37,887 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:05:37,890 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:05:37,896 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 19:05:37,899 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:05:37,900 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:05:37,904 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:05:37,910 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 19:05:37,911 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 19:05:39,749 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 19:05:39,751 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 3개
+2026-03-15 19:05:39,752 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 19:05:39,754 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 19:05:39,755 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 19:05:39,755 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 19:05:39,755 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 19:05:39,755 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 19:05:49,226 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:05:59,571 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:06:09,905 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:06:20,245 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:06:30,602 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:06:34,184 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:06:35,129 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 19:06:35,583 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 19:06:36,301 [INFO] publisher.blogger - 토큰 갱신 완료
+2026-03-15 19:06:36,305 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-15 19:06:38,891 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/ai.html
+2026-03-15 19:06:39,341 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 19:06:39,342 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/ai.html
+2026-03-15 19:06:44,447 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:06:54,760 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:07:05,017 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:07:15,347 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:07:25,686 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:07:35,944 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:07:46,277 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:07:56,618 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:08:06,873 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:08:17,197 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:08:27,545 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:08:37,880 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:23:51,371 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 19:23:52,882 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 19:23:52,883 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 19:23:52,883 [INFO] telegram.ext.Application - Application started
+2026-03-15 19:23:53,171 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 19:23:53,173 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 19:23:53,173 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 19:23:53,173 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 19:23:53,173 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 19:23:54,766 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 29개
+2026-03-15 19:23:54,798 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 19:23:54,798 [INFO] agents.content_writer - Claude API로 글 작성 시작
+2026-03-15 19:23:55,012 [INFO] agents.content_writer - 글 작성 중 [1/3]...
+2026-03-15 19:24:50,117 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 19:24:50,167 [INFO] agents.content_writer - 글 1 완료: 북한의 AI 위장취업 수법 완전 분석: IT 기업이 반
+2026-03-15 19:24:50,167 [INFO] agents.content_writer - 글 작성 중 [2/3]...
+2026-03-15 19:25:39,685 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 19:25:39,686 [INFO] agents.content_writer - 글 2 완료: 넷플릭스 AI 전면 도입, 한국 콘텐츠 산업에 미치는 
+2026-03-15 19:25:39,687 [INFO] agents.content_writer - 글 작성 중 [3/3]...
+2026-03-15 19:26:34,777 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 19:26:34,778 [INFO] agents.content_writer - 글 3 완료: AI 농업 혁명: 미국 농가 농약 비용 80% 절감, 
+2026-03-15 19:26:34,778 [INFO] agents.content_writer - 글 작성 완료: 3개
+2026-03-15 19:26:34,778 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 19:26:34,782 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:26:34,788 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:26:34,791 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:26:34,809 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 19:26:34,811 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:26:34,812 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:26:34,814 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:26:34,820 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 19:26:34,822 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:26:34,823 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:26:34,826 [WARNING] agents.thumbnail_maker - 폰트 파일 없음: C:\Users\seokn\Desktop\csn\blogger_auto_project\assets\fonts\NanumGothicBold.ttf, 기본 폰트 사용
+2026-03-15 19:26:34,832 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 19:26:34,832 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 19:26:36,727 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 19:26:36,728 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 3개
+2026-03-15 19:26:36,729 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 19:26:36,763 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 19:26:36,763 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 19:26:36,763 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 19:26:36,763 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 19:26:36,764 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 19:26:46,139 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:27:49,760 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:28:00,585 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:28:10,838 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:28:21,094 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:28:28,527 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:28:29,454 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 19:28:29,904 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 19:28:31,494 [INFO] agents.thumbnail_maker - imgbb 업로드 완료: https://i.ibb.co/fY9nxTRf/cca9a6dec8e4.png
+2026-03-15 19:28:31,512 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-15 19:28:33,716 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/ai-80.html
+2026-03-15 19:28:34,160 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 19:28:34,161 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/ai-80.html
+2026-03-15 19:28:38,892 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:28:49,183 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:28:59,479 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:29:09,821 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:29:20,158 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:29:30,498 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:29:40,836 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:29:51,091 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:30:01,427 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:30:11,768 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:30:22,107 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:30:32,360 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:30:42,616 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:30:52,935 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:31:03,189 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:31:13,522 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:31:23,862 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:31:34,117 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:31:44,448 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:31:54,779 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:32:05,126 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:32:15,479 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:32:25,812 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:32:36,067 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:32:46,399 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:32:56,736 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:33:07,076 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:33:17,331 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:33:27,651 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:33:37,906 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:33:48,161 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:33:58,474 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:34:08,824 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:34:19,168 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:34:29,522 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:34:39,851 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:34:50,196 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 19:35:00,551 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 20:53:57,738 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 20:53:59,002 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 20:53:59,003 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 20:53:59,003 [INFO] telegram.ext.Application - Application started
+2026-03-15 20:53:59,238 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 20:53:59,239 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 20:53:59,239 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 20:53:59,239 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 20:53:59,240 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 20:54:00,769 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 30개
+2026-03-15 20:54:00,771 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 20:54:00,772 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku 초안 + Sonnet 검토)
+2026-03-15 20:54:00,980 [INFO] agents.content_writer -   [1/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 20:54:17,595 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 20:54:17,611 [INFO] agents.content_writer -   [1/4] IT 검토 중 (Sonnet)...
+2026-03-15 20:55:23,109 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 20:55:23,110 [WARNING] agents.content_writer - 글 1 검토 실패, 초안 사용: Expecting ',' delimiter: line 7 column 2842 (char 3134)
+2026-03-15 20:55:23,110 [INFO] agents.content_writer -   완료: AI 저작권 침해, 어디까지가 합법일까?
+2026-03-15 20:55:23,110 [INFO] agents.content_writer -   [2/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 20:55:37,431 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 20:55:37,432 [INFO] agents.content_writer -   [2/4] IT 검토 중 (Sonnet)...
+2026-03-15 20:56:29,874 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 20:56:29,875 [INFO] agents.content_writer -   완료: AI 정밀농업으로 농약비 80% 절감 — 스마트팜이 바
+2026-03-15 20:56:29,876 [INFO] agents.content_writer -   [3/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 20:56:47,383 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 20:56:47,384 [INFO] agents.content_writer -   [3/4] 경제 검토 중 (Sonnet)...
+2026-03-15 20:57:54,247 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 20:57:54,248 [INFO] agents.content_writer -   완료: 국민연금 주식 투자 비중 50% 돌파 — 가입자 노후자
+2026-03-15 20:57:54,248 [INFO] agents.content_writer -   [4/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 20:58:11,968 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 20:58:11,969 [INFO] agents.content_writer -   [4/4] 경제 검토 중 (Sonnet)...
+2026-03-15 20:59:15,740 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 20:59:15,741 [INFO] agents.content_writer -   완료: 서학개미 급증이 바꾼 한국 개인자산 지형도 — 글로벌 
+2026-03-15 20:59:15,742 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 2개 + 경제 2개)
+2026-03-15 20:59:15,742 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 20:59:15,799 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 20:59:15,812 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 20:59:15,824 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 20:59:15,836 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 20:59:15,837 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 20:59:18,092 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 20:59:18,093 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 20:59:18,094 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 20:59:18,109 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 20:59:18,110 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 20:59:18,110 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 20:59:18,110 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 20:59:18,110 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 20:59:27,133 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 20:59:37,472 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 20:59:47,819 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 20:59:51,401 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 20:59:52,290 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 20:59:52,721 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 20:59:54,556 [INFO] agents.thumbnail_maker - imgbb 업로드 완료: https://i.ibb.co/0pxrBWCC/48151c1c96ec.png
+2026-03-15 20:59:55,031 [INFO] publisher.blogger - 토큰 갱신 완료
+2026-03-15 20:59:55,036 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-15 20:59:57,034 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/50.html
+2026-03-15 20:59:57,462 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 20:59:57,464 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/50.html
+2026-03-15 21:00:01,751 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:00:12,084 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:00:22,320 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:00:32,659 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:00:43,005 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:00:53,357 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:01:03,594 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:01:13,926 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:01:24,277 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:01:34,620 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:01:44,857 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:01:55,094 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:02:05,435 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:02:15,778 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:02:26,135 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:02:36,463 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:02:46,765 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:02:57,054 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:03:07,399 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:03:17,636 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:03:27,872 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:03:38,109 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:03:48,457 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:03:58,694 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:04:09,050 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:04:19,370 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:23:35,867 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:23:41,862 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 21:36:10,335 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 21:36:11,532 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 21:36:11,533 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 21:36:11,533 [INFO] telegram.ext.Application - Application started
+2026-03-15 21:36:11,785 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 21:36:11,785 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 21:36:11,786 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 21:36:11,786 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 21:36:11,786 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 21:36:13,435 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 29개
+2026-03-15 21:36:13,435 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 21:36:13,436 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 21:36:13,683 [INFO] agents.content_writer -   [1/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 21:36:30,802 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:36:30,818 [ERROR] scheduler - 파이프라인 오류: name 'reviewed' is not defined
+Traceback (most recent call last):
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\scheduler.py", line 28, in run_daily_pipeline
+    candidates = write(news_list)
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\agents\content_writer.py", line 107, in write
+    used_topics.append(reviewed.get("title", f"post{post_id}"))
+                       ^^^^^^^^
+NameError: name 'reviewed' is not defined. Did you mean: 'reversed'?
+2026-03-15 21:36:30,823 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 21:36:30,823 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 21:36:30,824 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 21:36:30,824 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 21:36:30,824 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 21:36:41,579 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:36:51,822 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:37:02,128 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:37:12,472 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:37:22,835 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:37:29,565 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 21:38:01,386 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 21:38:02,568 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 21:38:02,569 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 21:38:02,569 [INFO] telegram.ext.Application - Application started
+2026-03-15 21:38:02,805 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 21:38:02,806 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 21:38:02,806 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 21:38:02,806 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 21:38:02,806 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 21:38:03,281 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 29개
+2026-03-15 21:38:03,281 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 21:38:03,281 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 21:38:03,546 [INFO] agents.content_writer -   [1/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 21:38:15,686 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:38:15,711 [INFO] agents.content_writer -   완료: AI 저작권 논쟁, 기업이 알아야 할 법적 기준
+2026-03-15 21:38:15,711 [INFO] agents.content_writer -   [2/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 21:38:35,841 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:38:35,842 [INFO] agents.content_writer -   완료: 넷플릭스의 AI 투자 전략, 한국 콘텐츠 산업에 미치는
+2026-03-15 21:38:35,843 [INFO] agents.content_writer -   [3/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 21:38:53,059 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:38:53,060 [INFO] agents.content_writer -   완료: 국민연금 주식 50% 시대, 개인투자자는 어떻게 대응할
+2026-03-15 21:38:53,061 [INFO] agents.content_writer -   [4/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 21:39:11,468 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:39:11,469 [INFO] agents.content_writer -   완료: 부자 48만명이 선택한 투자처, 주식이 부동산을 넘었다
+2026-03-15 21:39:11,469 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 2 + 경제 2, 모델: Haiku)
+2026-03-15 21:39:11,470 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 21:39:11,490 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 21:39:11,502 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 21:39:11,513 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 21:39:11,525 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 21:39:11,526 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 21:39:13,938 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 21:39:13,939 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 21:39:13,940 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 21:39:13,943 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 21:39:13,943 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 21:39:13,944 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 21:39:13,944 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 21:39:13,944 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 21:39:22,820 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:39:33,175 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:39:35,943 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:39:36,818 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 21:39:37,246 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:39:37,248 [INFO] agents.image_generator - 썸네일 이미지 생성 중 (Gemini)...
+2026-03-15 21:39:38,134 [INFO] google_genai.models - AFC is enabled with max remote calls: 10.
+2026-03-15 21:39:38,354 [INFO] httpx - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 404 Not Found"
+2026-03-15 21:39:38,355 [ERROR] agents.image_generator - Gemini 이미지 생성 실패: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-2.0-flash-preview-image-generation is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-15 21:39:40,094 [INFO] agents.thumbnail_maker - imgbb 업로드 완료: https://i.ibb.co/27yJFB6N/086111a1568b.png
+2026-03-15 21:39:40,553 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:39:40,554 [INFO] agents.image_generator - 본문 이미지 1/2 생성 중 (Gemini)...
+2026-03-15 21:39:40,966 [INFO] google_genai.models - AFC is enabled with max remote calls: 10.
+2026-03-15 21:39:41,200 [INFO] httpx - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 404 Not Found"
+2026-03-15 21:39:41,201 [ERROR] agents.image_generator - Gemini 이미지 생성 실패: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-2.0-flash-preview-image-generation is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-15 21:39:41,201 [INFO] agents.image_generator - 본문 이미지 2/2 생성 중 (Gemini)...
+2026-03-15 21:39:41,612 [INFO] google_genai.models - AFC is enabled with max remote calls: 10.
+2026-03-15 21:39:41,824 [INFO] httpx - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent "HTTP/1.1 404 Not Found"
+2026-03-15 21:39:41,825 [ERROR] agents.image_generator - Gemini 이미지 생성 실패: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-2.0-flash-preview-image-generation is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-15 21:39:42,241 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:39:42,256 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-15 21:39:44,266 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/50_01627604444.html
+2026-03-15 21:39:44,501 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 400 Bad Request"
+2026-03-15 21:39:44,502 [ERROR] bot.telegram_bot - 발행 실패: Can't parse entities: can't find end of the entity starting at byte offset 145
+2026-03-15 21:39:44,946 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:39:46,183 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:39:56,421 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:40:06,657 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:40:16,897 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:40:27,133 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:40:37,375 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:40:47,611 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:40:57,848 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:41:08,085 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:41:10,637 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 21:41:18,583 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 21:41:19,755 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 21:41:19,756 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 21:41:19,757 [INFO] telegram.ext.Application - Application started
+2026-03-15 21:41:19,998 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 21:41:19,999 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 21:41:19,999 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 21:41:19,999 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 21:41:20,000 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 21:41:21,628 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 29개
+2026-03-15 21:41:21,629 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 21:41:21,629 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 21:41:21,836 [INFO] agents.content_writer -   [1/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 21:41:45,888 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:41:45,907 [INFO] agents.content_writer -   완료: AI 저작권 침해 논쟁, 기업과 창작자를 위한 합법 기
+2026-03-15 21:41:45,907 [INFO] agents.content_writer -   [2/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 21:42:03,817 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:42:03,818 [INFO] agents.content_writer -   완료: 넷플릭스의 AI 투자 승부수, 한국 콘텐츠 산업에 미치
+2026-03-15 21:42:03,819 [INFO] agents.content_writer -   [3/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 21:42:22,716 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:42:22,717 [INFO] agents.content_writer -   완료: 국민연금 주식투자 50% 돌파, 개인투자자가 알아야 할
+2026-03-15 21:42:22,718 [INFO] agents.content_writer -   [4/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 21:42:43,376 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:42:43,377 [INFO] agents.content_writer -   완료: 한국 부자 48만명의 투자 비결, 부동산 아닌 주식으로
+2026-03-15 21:42:43,377 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 2 + 경제 2, 모델: Haiku)
+2026-03-15 21:42:43,377 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 21:42:43,399 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 21:42:43,410 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 21:42:43,422 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 21:42:43,433 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 21:42:43,434 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 21:42:45,406 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 21:42:45,407 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 21:42:45,408 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 21:42:45,412 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 21:42:45,412 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 21:42:45,412 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 21:42:45,413 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 21:42:45,413 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 21:42:54,701 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:43:05,057 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:43:15,296 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:43:25,625 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:43:35,974 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:43:46,214 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:43:56,554 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:44:02,093 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:44:02,995 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 21:44:03,434 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:44:03,435 [INFO] agents.image_generator - 썸네일 이미지 생성 중 (Gemini)...
+2026-03-15 21:44:04,502 [INFO] httpx - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict "HTTP/1.1 404 Not Found"
+2026-03-15 21:44:04,503 [ERROR] agents.image_generator - Gemini 이미지 생성 실패: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/imagen-3.0-generate-002 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-15 21:44:06,275 [INFO] agents.thumbnail_maker - imgbb 업로드 완료: https://i.ibb.co/SDHCBdV0/8adf53823427.png
+2026-03-15 21:44:06,705 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:44:06,706 [INFO] agents.image_generator - 본문 이미지 1/2 생성 중 (Gemini)...
+2026-03-15 21:44:07,355 [INFO] httpx - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict "HTTP/1.1 404 Not Found"
+2026-03-15 21:44:07,356 [ERROR] agents.image_generator - Gemini 이미지 생성 실패: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/imagen-3.0-generate-002 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-15 21:44:07,357 [INFO] agents.image_generator - 본문 이미지 2/2 생성 중 (Gemini)...
+2026-03-15 21:44:07,992 [INFO] httpx - HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict "HTTP/1.1 404 Not Found"
+2026-03-15 21:44:07,993 [ERROR] agents.image_generator - Gemini 이미지 생성 실패: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/imagen-3.0-generate-002 is not found for API version v1beta, or is not supported for predict. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-15 21:44:08,416 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:44:08,422 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-15 21:44:09,884 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/50_0334237760.html
+2026-03-15 21:44:10,308 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:44:10,309 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/50_0334237760.html
+2026-03-15 21:44:12,334 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:44:22,678 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:44:32,916 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:44:43,231 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:44:53,473 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:45:03,715 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:45:13,956 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:45:24,322 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:45:34,562 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:45:44,801 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:45:55,042 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:46:05,282 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:46:15,524 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:46:25,854 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:46:33,306 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 21:46:52,130 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 21:46:53,339 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 21:46:53,340 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 21:46:53,341 [INFO] telegram.ext.Application - Application started
+2026-03-15 21:46:53,577 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 21:46:53,578 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 21:46:53,578 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 21:46:53,578 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 21:46:53,578 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 21:46:55,054 [INFO] agents.news_collector - 수집 완료: IT 15개, 경제 15개 → 중복 제거 후 29개
+2026-03-15 21:46:55,054 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 21:46:55,055 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 21:46:55,363 [INFO] agents.content_writer -   [1/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 21:47:17,067 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:47:17,098 [INFO] agents.content_writer -   완료: AI 저작권 침해, 합법과 불법의 경계선은?
+2026-03-15 21:47:17,099 [INFO] agents.content_writer -   [2/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 21:47:32,494 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:47:32,496 [INFO] agents.content_writer -   완료: AI 트래픽 제어 기술, 대규모 공연서 통신 대란 막는
+2026-03-15 21:47:32,496 [INFO] agents.content_writer -   [3/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 21:47:52,400 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:47:52,401 [INFO] agents.content_writer -   완료: 국민연금 주식 50% 시대, 개인투자자도 준비해야 할 
+2026-03-15 21:47:52,401 [INFO] agents.content_writer -   [4/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 21:48:08,347 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:48:08,349 [INFO] agents.content_writer -   완료: 해외주식 투자 열풍, 서학개미가 만드는 새로운 자산 전
+2026-03-15 21:48:08,349 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 2 + 경제 2, 모델: Haiku)
+2026-03-15 21:48:08,349 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 21:48:08,373 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 21:48:08,384 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 21:48:08,395 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 21:48:08,406 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 21:48:08,407 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 21:48:10,638 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 21:48:10,639 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 21:48:10,641 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 21:48:10,644 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 21:48:10,645 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 21:48:10,645 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 21:48:10,645 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 21:48:10,645 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 21:48:19,634 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:48:29,979 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:48:34,364 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:48:35,301 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 21:48:35,738 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:48:35,739 [INFO] agents.image_generator - 썸네일 이미지 생성 중 (Pollinations)...
+2026-03-15 21:48:35,739 [INFO] agents.image_generator - 이미지 생성 요청 중...
+2026-03-15 21:49:07,988 [ERROR] agents.image_generator - 이미지 생성 실패: 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Create%20a%20professional%20blog%20thumbnail%20image%2C%20landscape%2016%3A9%20ratio.%20Topic%3A%20%ED%95%B4%EC%99%B8%EC%A3%BC%EC%8B%9D%20%ED%88%AC%EC%9E%90%20%EC%97%B4%ED%92%8D%2C%20%EC%84%9C%ED%95%99%EA%B0%9C%EB%AF%B8%EA%B0%80%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EC%83%88%EB%A1%9C%EC%9A%B4%20%EC%9E%90%EC%82%B0%20%EC%A0%84%EB%9E%B5.%20Category%3A%20%EA%B2%BD%EC%A0%9C.%20Keywords%3A%20%ED%95%B4%EC%99%B8%EC%A3%BC%EC%8B%9D%20%ED%88%AC%EC%9E%90%2C%20%EC%84%9C%ED%95%99%EA%B0%9C%EB%AF%B8%2C%20%EB%8C%80%EC%99%B8%EA%B8%88%EC%9C%B5%EC%9E%90%EC%82%B0.%20Style%3A%20modern%2C%20clean%2C%20high%20quality%20digital%20art%20or%20photo.%20No%20text%20overlay.?width=1200&height=628&nologo=true&model=flux
+2026-03-15 21:49:10,857 [INFO] agents.thumbnail_maker - imgbb 업로드 완료: https://i.ibb.co/7t5hq56k/34547edd207d.png
+2026-03-15 21:49:10,860 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:49:11,762 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 21:49:11,763 [INFO] agents.image_generator - 본문 이미지 1/2 생성 중 (Pollinations)...
+2026-03-15 21:49:11,763 [INFO] agents.image_generator - 이미지 생성 요청 중...
+2026-03-15 21:50:37,870 [ERROR] agents.image_generator - 이미지 생성 실패: 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Create%20a%20professional%20blog%20illustration%20image%2C%20landscape%2016%3A9%20ratio.%20Main%20topic%3A%20%ED%95%B4%EC%99%B8%EC%A3%BC%EC%8B%9D%20%ED%88%AC%EC%9E%90%20%EC%97%B4%ED%92%8D%2C%20%EC%84%9C%ED%95%99%EA%B0%9C%EB%AF%B8%EA%B0%80%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EC%83%88%EB%A1%9C%EC%9A%B4%20%EC%9E%90%EC%82%B0%20%EC%A0%84%EB%9E%B5.%20Section%3A%20%ED%95%B4%EC%99%B8%EC%A3%BC%EC%8B%9D%20%ED%88%AC%EC%9E%90%2C%20%EC%9D%B4%EC%A0%9C%20%EC%84%A0%ED%83%9D%EC%9D%B4%20%EC%95%84%EB%8B%8C%20%ED%95%84%EC%88%98%EC%9D%B8%EA%B0%80.%20Style%3A%20modern%2C%20clean%2C%20informative.%20No%20text%20overlay.?width=800&height=450&nologo=true&model=flux
+2026-03-15 21:50:37,872 [INFO] agents.image_generator - 본문 이미지 2/2 생성 중 (Pollinations)...
+2026-03-15 21:50:37,872 [INFO] agents.image_generator - 이미지 생성 요청 중...
+2026-03-15 21:52:07,798 [ERROR] agents.image_generator - 이미지 생성 실패: 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Create%20a%20professional%20blog%20illustration%20image%2C%20landscape%2016%3A9%20ratio.%20Main%20topic%3A%20%ED%95%B4%EC%99%B8%EC%A3%BC%EC%8B%9D%20%ED%88%AC%EC%9E%90%20%EC%97%B4%ED%92%8D%2C%20%EC%84%9C%ED%95%99%EA%B0%9C%EB%AF%B8%EA%B0%80%20%EB%A7%8C%EB%93%9C%EB%8A%94%20%EC%83%88%EB%A1%9C%EC%9A%B4%20%EC%9E%90%EC%82%B0%20%EC%A0%84%EB%9E%B5.%20Section%3A%20%EB%B6%80%EC%9E%90%EB%93%A4%EC%9D%98%20%ED%88%AC%EC%9E%90%20%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4%EB%8A%94%20%EC%9D%B4%EB%AF%B8%20%EB%B3%80%ED%96%88%EB%8B%A4.%20Style%3A%20modern%2C%20clean%2C%20informative.%20No%20text%20overlay.?width=800&height=450&nologo=true&model=flux
+2026-03-15 21:52:07,801 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 21:52:07,806 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 21:59:02,995 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 21:59:04,211 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 21:59:04,212 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 21:59:04,212 [INFO] telegram.ext.Application - Application started
+2026-03-15 21:59:04,453 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 21:59:04,454 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 21:59:04,454 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 21:59:04,454 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 21:59:04,454 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 21:59:07,078 [INFO] agents.news_collector - 수집 완료: IT 15개, 전자기기 15개, 경제 15개 → 중복 제거 후 45개
+2026-03-15 21:59:07,078 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 21:59:07,079 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 21:59:07,287 [INFO] agents.content_writer -   [1/3] IT 초안 작성 중 (Haiku)...
+2026-03-15 21:59:21,363 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:59:21,380 [INFO] agents.content_writer -   완료: AI 시대 금융권의 생존 전략, 보안과 기술의 融合이 
+2026-03-15 21:59:21,380 [INFO] agents.content_writer -   [2/3] 전자기기 초안 작성 중 (Haiku)...
+2026-03-15 21:59:42,248 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 21:59:42,249 [INFO] agents.content_writer -   완료: 대학생 평균 5개 전자기기 시대, 똑똑한 멀티탭 선택법
+2026-03-15 21:59:42,250 [INFO] agents.content_writer -   [3/3] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:00:02,729 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:00:02,731 [INFO] agents.content_writer -   완료: 국민연금 주식 비중 50% 돌파, 당신의 자산 전략은?
+2026-03-15 22:00:02,731 [INFO] agents.content_writer -   [4/3] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:00:22,594 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:00:22,595 [INFO] agents.content_writer -   완료: 해외주식 투자 열풍, 한국인의 자산 구조가 바뀐다
+2026-03-15 22:00:22,595 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 1 + 전자기기 1 + 경제 2, 모델: Haiku)
+2026-03-15 22:00:22,596 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 22:00:22,653 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 22:00:22,664 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 22:00:22,676 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 22:00:22,686 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 22:00:22,687 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 22:00:24,881 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 22:00:24,882 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 22:00:24,883 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 22:00:24,886 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 22:00:24,886 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 22:00:24,886 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:00:24,887 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 22:00:24,887 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 22:00:33,962 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:00:44,309 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:00:54,547 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:00:59,761 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:01:00,645 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 22:01:01,075 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:01:02,298 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:01:02,300 [INFO] agents.image_generator - 썸네일 이미지 생성 중 (Pollinations)...
+2026-03-15 22:01:02,300 [INFO] agents.image_generator - 이미지 생성 요청 중...
+2026-03-15 22:01:03,614 [ERROR] agents.image_generator - 이미지 생성 실패: 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Professional%20blog%20thumbnail%2C%2016%3A9%2C%20College%20students%20with%20five%20devices%20need%20smart%20power%20strips%3A%20practical%20guide%20to%20choosing%20the%20perfect%20multi-outlet%20surge%20protector.%2C%20modern%20clean%20digital%20art%2C%20high%20quality%2C%20no%20text?width=1200&height=628&nologo=true&model=flux
+2026-03-15 22:01:05,317 [INFO] agents.thumbnail_maker - imgbb 업로드 완료: https://i.ibb.co/mrtpGPxw/6fe069b33953.png
+2026-03-15 22:01:05,743 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:01:07,007 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:01:07,009 [INFO] agents.image_generator - 본문 이미지 1/2 생성 중 (Pollinations)...
+2026-03-15 22:01:07,009 [INFO] agents.image_generator - 이미지 생성 요청 중...
+2026-03-15 22:02:33,666 [ERROR] agents.image_generator - 이미지 생성 실패: 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Professional%20blog%20illustration%2C%2016%3A9%2C%20College%20student%20surrounded%20by%20five%20electronic%20devices%2C%20smart%20power%20strip%20solution%2C%20modern%20digital%20lifestyle%20necessity.%2C%20modern%20clean%20informative%20style%2C%20no%20text?width=800&height=450&nologo=true&model=flux
+2026-03-15 22:02:34,757 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:02:34,758 [INFO] agents.image_generator - 본문 이미지 2/2 생성 중 (Pollinations)...
+2026-03-15 22:02:34,759 [INFO] agents.image_generator - 이미지 생성 요청 중...
+2026-03-15 22:04:03,672 [ERROR] agents.image_generator - 이미지 생성 실패: 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Professional%20blog%20illustration%2C%2016%3A9%2C%20High-power%20multi-tap%20with%20five%20electronic%20devices%2C%20smart%20charging%20solution%20for%20modern%20students.%2C%20modern%20clean%20informative%20style%2C%20no%20text?width=800&height=450&nologo=true&model=flux
+2026-03-15 22:04:03,676 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:04:04,655 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:04:05,250 [INFO] publisher.blogger - 토큰 갱신 완료
+2026-03-15 22:04:05,252 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-15 22:04:07,426 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/5.html
+2026-03-15 22:04:07,846 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:04:07,848 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/5.html
+2026-03-15 22:04:14,028 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:04:24,364 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:07:42,308 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:08:08,222 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:08:18,456 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:08:26,236 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 22:09:14,349 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 22:09:15,677 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 22:09:15,678 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:09:15,679 [INFO] telegram.ext.Application - Application started
+2026-03-15 22:09:15,915 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 22:09:15,916 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 22:09:15,916 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 22:09:15,917 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 22:09:15,917 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 22:09:18,628 [INFO] agents.news_collector - 수집 완료: IT 15개, 전자기기 15개, 경제 15개 → 중복 제거 후 44개
+2026-03-15 22:09:18,628 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 22:09:18,628 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 22:09:18,839 [INFO] agents.content_writer -   [1/3] IT 초안 작성 중 (Haiku)...
+2026-03-15 22:09:34,637 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:09:34,662 [INFO] agents.content_writer -   완료: AI 저작권 침해의 경계선, 기업이 알아야 할 법적 기
+2026-03-15 22:09:34,663 [INFO] agents.content_writer -   [2/3] 전자기기 초안 작성 중 (Haiku)...
+2026-03-15 22:09:52,980 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:09:52,982 [INFO] agents.content_writer -   완료: 대학생 평균 5개 전자기기 시대, 현명한 멀티탭 관리법
+2026-03-15 22:09:52,982 [INFO] agents.content_writer -   [3/3] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:10:12,447 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:10:12,448 [INFO] agents.content_writer -   완료: 국민연금 주식 50% 시대, 당신의 연금은 안전한가?
+2026-03-15 22:10:12,448 [INFO] agents.content_writer -   [4/3] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:10:30,251 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:10:30,252 [INFO] agents.content_writer -   완료: 해외주식 투자 열풍, 한국 부자들의 포트폴리오 전략이 
+2026-03-15 22:10:30,252 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 1 + 전자기기 1 + 경제 2, 모델: Haiku)
+2026-03-15 22:10:30,252 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 22:10:30,316 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 22:10:30,331 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 22:10:30,347 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 22:10:30,363 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 22:10:30,363 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 22:10:33,147 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 22:10:33,149 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 22:10:33,150 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 22:10:33,155 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 22:10:33,155 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 22:10:33,155 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:10:33,156 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 22:10:33,156 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 22:10:41,820 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:10:52,057 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:11:02,297 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:11:12,648 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:11:19,508 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:11:20,434 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 22:11:20,882 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:11:22,077 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:11:22,078 [INFO] agents.image_generator - 썸네일 이미지 생성 중 (Pollinations)...
+2026-03-15 22:11:22,078 [INFO] agents.image_generator - 이미지 생성 요청 중 (model=flux)...
+2026-03-15 22:11:23,951 [WARNING] agents.image_generator - 이미지 생성 실패 (model=flux): 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Professional%20blog%20thumbnail%2C%2016%3A9%2C%20Wealthy%20Korean%20investors%20diversifying%20portfolios%20with%20international%20stocks%2C%20modern%20financial%20strategy%20visualization.%2C%20modern%20clean%20digital%20art%2C%20high%20quality%2C%20no%20text?width=1200&height=628&nologo=true&model=flux
+2026-03-15 22:11:23,952 [INFO] agents.image_generator - 이미지 생성 요청 중 (model=turbo)...
+2026-03-15 22:12:53,099 [WARNING] agents.image_generator - 이미지 생성 실패 (model=turbo): 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Professional%20blog%20thumbnail%2C%2016%3A9%2C%20Wealthy%20Korean%20investors%20diversifying%20portfolios%20with%20international%20stocks%2C%20modern%20financial%20strategy%20visualization.%2C%20modern%20clean%20digital%20art%2C%20high%20quality%2C%20no%20text?width=1200&height=628&nologo=true&model=turbo
+2026-03-15 22:12:53,099 [INFO] agents.image_generator - 이미지 생성 요청 중 (model=dreamshaper)...
+2026-03-15 22:14:23,350 [WARNING] agents.image_generator - 이미지 생성 실패 (model=dreamshaper): HTTPSConnectionPool(host='image.pollinations.ai', port=443): Read timed out. (read timeout=90)
+2026-03-15 22:14:23,350 [ERROR] agents.image_generator - 모든 모델 이미지 생성 실패
+2026-03-15 22:14:25,001 [INFO] agents.thumbnail_maker - imgbb 업로드 완료: https://i.ibb.co/1JBwPsFt/1b12fc85399e.png
+2026-03-15 22:14:25,004 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:14:26,015 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:14:27,248 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:14:27,249 [INFO] agents.image_generator - 본문 이미지 1/2 생성 중 (Pollinations)...
+2026-03-15 22:14:27,249 [INFO] agents.image_generator - 이미지 생성 요청 중 (model=flux)...
+2026-03-15 22:14:52,372 [WARNING] agents.image_generator - 이미지 생성 실패 (model=flux): 502 Server Error: Bad Gateway for url: https://image.pollinations.ai/prompt/Professional%20blog%20illustration%2C%2016%3A9%2C%20Global%20stock%20investment%20boom%20reshaping%20Korean%20wealth%20portfolios%20with%20new%20diversified%20investment%20paradigm%20and%20modern%20trading%20strategies.%2C%20modern%20clean%20informative%20style%2C%20no%20text?width=800&height=450&nologo=true&model=flux
+2026-03-15 22:14:52,372 [INFO] agents.image_generator - 이미지 생성 요청 중 (model=turbo)...
+2026-03-15 22:14:53,132 [WARNING] agents.image_generator - 이미지 생성 실패 (model=turbo): 429 Client Error: Too Many Requests for url: https://image.pollinations.ai/prompt/Professional%20blog%20illustration%2C%2016%3A9%2C%20Global%20stock%20investment%20boom%20reshaping%20Korean%20wealth%20portfolios%20with%20new%20diversified%20investment%20paradigm%20and%20modern%20trading%20strategies.%2C%20modern%20clean%20informative%20style%2C%20no%20text?width=800&height=450&nologo=true&model=turbo
+2026-03-15 22:14:53,132 [INFO] agents.image_generator - 이미지 생성 요청 중 (model=dreamshaper)...
+2026-03-15 22:15:53,606 [WARNING] agents.image_generator - 이미지 생성 실패 (model=dreamshaper): 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Professional%20blog%20illustration%2C%2016%3A9%2C%20Global%20stock%20investment%20boom%20reshaping%20Korean%20wealth%20portfolios%20with%20new%20diversified%20investment%20paradigm%20and%20modern%20trading%20strategies.%2C%20modern%20clean%20informative%20style%2C%20no%20text?width=800&height=450&nologo=true&model=dreamshaper
+2026-03-15 22:15:53,606 [ERROR] agents.image_generator - 모든 모델 이미지 생성 실패
+2026-03-15 22:15:54,875 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:15:54,876 [INFO] agents.image_generator - 본문 이미지 2/2 생성 중 (Pollinations)...
+2026-03-15 22:15:54,876 [INFO] agents.image_generator - 이미지 생성 요청 중 (model=flux)...
+2026-03-15 22:17:23,655 [WARNING] agents.image_generator - 이미지 생성 실패 (model=flux): 500 Server Error: Internal Server Error for url: https://image.pollinations.ai/prompt/Professional%20blog%20illustration%2C%2016%3A9%2C%20Wealthy%20investors%20shifting%20portfolios%20from%20real%20estate%20to%20stocks%2C%20modern%20financial%20strategy%20visualization%20with%20global%20market%20trends.%2C%20modern%20clean%20informative%20style%2C%20no%20text?width=800&height=450&nologo=true&model=flux
+2026-03-15 22:17:23,655 [INFO] agents.image_generator - 이미지 생성 요청 중 (model=turbo)...
+2026-03-15 22:18:53,062 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 22:18:53,104 [ERROR] asyncio - Task exception was never retrieved
+future: <Task finished name='Application:8723872929:update_fetcher' coro=<Application._update_fetcher() done, defined at C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_application.py:1231> exception=KeyboardInterrupt()>
+Traceback (most recent call last):
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\main.py", line 67, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 706, in run_until_complete
+    self.run_forever()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 677, in run_forever
+    self._run_once()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\base_events.py", line 2046, in _run_once
+    handle._run()
+    ~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\events.py", line 94, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_application.py", line 1233, in _update_fetcher
+    await self.__update_fetcher()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_application.py", line 1229, in __update_fetcher
+    await self.__process_update_wrapper(update)
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_application.py", line 1244, in __process_update_wrapper
+    await self._update_processor.process_update(update, self.process_update(update))
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_baseupdateprocessor.py", line 171, in process_update
+    await self.do_process_update(update, coroutine)
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_baseupdateprocessor.py", line 196, in do_process_update
+    await coroutine
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_application.py", line 1315, in process_update
+    await coroutine
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_handlers\basehandler.py", line 159, in handle_update
+    return await self.callback(update, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\bot\telegram_bot.py", line 60, in _handle_callback
+    content_html = inject_content_images(
+        candidate["content_html"],
+        candidate["title"],
+    )
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\agents\image_generator.py", line 113, in inject_content_images
+    url = _upload_bytes(image_bytes)
+              ~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\agents\image_generator.py", line 42, in _generate_image
+    params={"query": query, "per_page": 1, "orientation": "landscape"},
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\requests\sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\requests\sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\requests\adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\urllib3\connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\urllib3\connection.py", line 571, in getresponse
+    httplib_response = super().getresponse()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\http\client.py", line 1450, in getresponse
+    response.begin()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\http\client.py", line 336, in begin
+    version, status, reason = self._read_status()
+                              ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\http\client.py", line 297, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\socket.py", line 725, in readinto
+    return self._sock.recv_into(b)
+           ~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 1304, in recv_into
+    return self.read(nbytes, buffer)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 1138, in read
+    return self._sslobj.read(len, buffer)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\asyncio\runners.py", line 166, in _on_sigint
+    raise KeyboardInterrupt()
+KeyboardInterrupt
+2026-03-15 22:20:37,015 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 22:20:38,211 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 22:20:38,212 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:20:38,212 [INFO] telegram.ext.Application - Application started
+2026-03-15 22:20:38,449 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 22:20:38,450 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 22:20:38,450 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 22:20:38,450 [INFO] scheduler - [1/4] 뉴스 수집 중...
+2026-03-15 22:20:38,450 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 22:20:40,663 [INFO] agents.news_collector - 수집 완료: IT 15개, 전자기기 15개, 경제 15개 → 중복 제거 후 45개
+2026-03-15 22:20:40,663 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 22:20:40,663 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 22:20:40,872 [INFO] agents.content_writer -   [1/3] IT 초안 작성 중 (Haiku)...
+2026-03-15 22:20:58,850 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:20:58,868 [INFO] agents.content_writer -   완료: AI 저작권 침해, 어디까지가 합법일까?
+2026-03-15 22:20:58,868 [INFO] agents.content_writer -   [2/3] 전자기기 초안 작성 중 (Haiku)...
+2026-03-15 22:21:21,031 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:21:21,032 [INFO] agents.content_writer -   완료: 대학생 필수템 5개, 스마트폰·노트북·이어폰 구매 전략
+2026-03-15 22:21:21,032 [INFO] agents.content_writer -   [3/3] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:21:38,664 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:21:38,665 [INFO] agents.content_writer -   완료: 국민연금 주식 비중 50% 돌파, 당신의 노후자금이 어
+2026-03-15 22:21:38,665 [INFO] agents.content_writer -   [4/3] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:21:59,991 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:21:59,992 [INFO] agents.content_writer -   완료: 해외주식 투자 열풍, 한국인의 자산운용 패러다임이 바뀌
+2026-03-15 22:21:59,992 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 1 + 전자기기 1 + 경제 2, 모델: Haiku)
+2026-03-15 22:21:59,992 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 22:22:00,018 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 22:22:00,030 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 22:22:00,042 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 22:22:00,054 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 22:22:00,055 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 22:22:01,665 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 22:22:01,666 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 22:22:01,667 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 22:22:01,669 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 22:22:01,670 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 22:22:01,670 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:22:01,670 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 22:22:01,670 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 22:22:11,309 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:22:16,840 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:22:17,726 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 22:22:18,167 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:22:19,483 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:22:19,484 [INFO] agents.image_generator - 썸네일 이미지 검색 중 (Pexels): International stock investment, Korean investors, Asset management, Investment trends, Financial paradigm shift
+2026-03-15 22:22:24,965 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/W4kBRQr2/04414bc111bc.jpg
+2026-03-15 22:22:25,878 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:22:27,405 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:22:27,406 [INFO] agents.image_generator - 본문 이미지 1/2 검색 중 (Pexels): global investment, international stock trading, Korean investors, financial asset management, overseas stock market
+2026-03-15 22:22:31,114 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/W4kBRQr2/04414bc111bc.jpg
+2026-03-15 22:22:32,220 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:22:32,221 [INFO] agents.image_generator - 본문 이미지 2/2 검색 중 (Pexels): international stocks, foreign investment, global portfolio, investment trends, asset diversification
+2026-03-15 22:22:36,208 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/3mtMDSbb/d5b7c6618e51.jpg
+2026-03-15 22:22:36,211 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:22:37,109 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:22:37,124 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-15 22:22:39,319 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/blog-post.html
+2026-03-15 22:22:39,749 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:22:39,750 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/blog-post.html
+2026-03-15 22:22:46,450 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:22:56,775 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:23:07,016 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:23:17,258 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:23:22,629 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 22:32:54,115 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 22:32:55,323 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 22:32:55,324 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:32:55,324 [INFO] telegram.ext.Application - Application started
+2026-03-15 22:32:55,561 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 22:32:55,562 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 22:32:55,562 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 22:32:55,562 [INFO] scheduler - [1/4] 뉴스 및 트렌딩 키워드 수집 중...
+2026-03-15 22:32:55,562 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 22:32:57,916 [INFO] agents.news_collector - 수집 완료: IT 15개, 전자기기 15개, 경제 15개 → 중복 제거 후 44개
+2026-03-15 22:32:58,476 [INFO] agents.news_collector - 트렌딩 키워드 0개 수집: ...
+2026-03-15 22:32:58,476 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 22:32:58,477 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 22:32:58,688 [INFO] agents.content_writer -   [1/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 22:33:16,273 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:33:16,291 [INFO] agents.content_writer -   완료: AI 시대 금융업계의 생존 전략: IT·보안 융합이 답
+2026-03-15 22:33:16,291 [INFO] agents.content_writer -   [2/4] 전자기기 초안 작성 중 (Haiku)...
+2026-03-15 22:33:31,745 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:33:31,746 [INFO] agents.content_writer -   완료: 대학생 필수템 5개, 노트북·태블릿 선택법
+2026-03-15 22:33:31,746 [INFO] agents.content_writer -   [3/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:33:48,918 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:33:48,919 [INFO] agents.content_writer -   완료: 국민연금 주식 50% 돌파, 일반인 투자 전략은?
+2026-03-15 22:33:48,919 [INFO] agents.content_writer -   [4/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:34:07,280 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:34:07,281 [INFO] agents.content_writer -   완료: 해외주식 투자 열풍, 한국인의 자산 포트폴리오가 바뀌고
+2026-03-15 22:34:07,281 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 1 + 전자기기 1 + 경제 2, 모델: Haiku)
+2026-03-15 22:34:07,281 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 22:34:07,303 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 22:34:07,313 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 22:34:07,324 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 22:34:07,336 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 22:34:07,337 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 22:34:09,548 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 22:34:09,549 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 22:34:09,550 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 22:34:09,553 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 22:34:09,553 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 22:34:09,553 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:34:09,554 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 22:34:09,554 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 22:34:18,514 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:34:28,306 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:34:29,193 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 22:34:29,634 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:34:30,906 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:34:30,907 [INFO] agents.image_generator - 썸네일 이미지 검색 중 (Pexels): laptop selection, tablet guide, college essentials, student tech, electronics buying guide
+2026-03-15 22:34:35,543 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/S4SqRJx8/010042a25870.jpg
+2026-03-15 22:34:36,440 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:34:37,748 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:34:37,749 [INFO] agents.image_generator - 본문 이미지 [1/5] 검색 중 (Pexels): Korean university students electronics, college students gadgets essentials, laptop tablet selection, student tech devices, digital devices ownership
+2026-03-15 22:34:41,859 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/8gRCyFR9/203939073efd.jpg
+2026-03-15 22:34:43,125 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:34:43,127 [INFO] agents.image_generator - 본문 이미지 [2/5] 검색 중 (Pexels): laptop vs tablet, student tech essentials, notebook computer comparison, digital device choice, portable computing devices
+2026-03-15 22:34:47,354 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/SXtjVH0V/dd804a587eca.jpg
+2026-03-15 22:34:48,612 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:34:48,613 [INFO] agents.image_generator - 본문 이미지 [3/5] 검색 중 (Pexels): laptop buying guide, tablet selection tips, student essential gadgets, tech purchase considerations, student budget electronics
+2026-03-15 22:34:53,325 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/4Zb4dPrd/047ad439d3e6.jpg
+2026-03-15 22:34:54,590 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:34:54,591 [INFO] agents.image_generator - 본문 이미지 [4/5] 검색 중 (Pexels): Samsung one-stop care service, laptop tablet maintenance, student tech essentials, device care tips, electronics warranty service
+2026-03-15 22:35:02,126 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/35MrZbDk/f07bec10113a.jpg
+2026-03-15 22:35:03,263 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:35:03,264 [INFO] agents.image_generator - 본문 이미지 [5/5] 검색 중 (Pexels): electronic products market, laptop tablet selection, student essential gadgets, future tech trends, consumer electronics preparation
+2026-03-15 22:35:07,827 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/RGzKXC7x/f2f410f4ab52.jpg
+2026-03-15 22:35:07,828 [INFO] agents.image_generator - 본문 이미지 삽입 완료: 5/5개
+2026-03-15 22:35:07,829 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:35:08,725 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:35:08,730 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-15 22:35:11,026 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/5_01900533382.html
+2026-03-15 22:35:11,450 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:35:11,451 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/5_01900533382.html
+2026-03-15 22:35:18,176 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:35:28,513 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:35:38,752 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:35:49,113 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:35:59,442 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:36:09,778 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:36:20,018 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:36:30,258 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:36:40,604 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:36:50,947 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:37:01,286 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:37:11,615 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:37:21,856 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:37:32,095 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:37:42,455 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:37:43,830 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 22:41:27,142 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 22:41:28,355 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 22:41:28,356 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:41:28,356 [INFO] telegram.ext.Application - Application started
+2026-03-15 22:41:28,593 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 22:41:28,594 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 22:41:28,594 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 22:41:28,594 [INFO] scheduler - [1/4] 뉴스 및 트렌딩 키워드 수집 중...
+2026-03-15 22:41:28,594 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 22:41:30,797 [INFO] agents.news_collector - 수집 완료: IT 15개, 전자기기 15개, 경제 15개 → 중복 제거 후 44개
+2026-03-15 22:41:31,230 [INFO] agents.news_collector - 트렌딩 키워드 0개 수집: ...
+2026-03-15 22:41:31,231 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 22:41:31,231 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 22:41:31,448 [INFO] agents.content_writer -   [1/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 22:41:59,848 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:41:59,869 [INFO] agents.content_writer -   완료: AI 시대 IT 기업 취업, 지금 준비해야 할 것들
+2026-03-15 22:41:59,869 [INFO] agents.content_writer -   [2/4] 전자기기 초안 작성 중 (Haiku)...
+2026-03-15 22:42:26,938 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:42:26,939 [INFO] agents.content_writer -   완료: 대학생 5개 기기 시대, 노트북vs태블릿 어떻게 고르나
+2026-03-15 22:42:26,939 [INFO] agents.content_writer -   [3/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:42:50,589 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:42:50,590 [INFO] agents.content_writer -   완료: 국민연금 주식 50% 시대, 개인 투자자가 알아야 할 
+2026-03-15 22:42:50,590 [INFO] agents.content_writer -   [4/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:43:22,121 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:43:22,122 [ERROR] agents.content_writer - 글 4 초안 실패: Invalid control character at: line 7 column 1307 (char 1550)
+2026-03-15 22:43:22,123 [ERROR] scheduler - 파이프라인 오류: Invalid control character at: line 7 column 1307 (char 1550)
+Traceback (most recent call last):
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\scheduler.py", line 29, in run_daily_pipeline
+    candidates = write(news_list, trending=trending)
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\agents\content_writer.py", line 122, in write
+    draft = _write_draft(client, post_id, category, news_text, used_topics, trending)
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\agents\content_writer.py", line 95, in _write_draft
+    return _parse_json(message.content[0].text.strip())
+  File "C:\Users\seokn\Desktop\csn\blogger_auto_project\agents\content_writer.py", line 76, in _parse_json
+    return json.loads(response_text)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\json\__init__.py", line 352, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Invalid control character at: line 7 column 1307 (char 1550)
+2026-03-15 22:43:22,156 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 22:43:22,157 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 22:43:22,157 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:43:22,157 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 22:43:22,157 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 22:43:32,973 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:43:43,213 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:43:53,571 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:44:03,809 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:44:14,048 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:44:24,288 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:44:34,528 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:44:40,399 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 22:45:32,357 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 22:45:33,674 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 22:45:33,676 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:45:33,676 [INFO] telegram.ext.Application - Application started
+2026-03-15 22:45:33,912 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 22:45:33,913 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 22:45:33,914 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 22:45:33,914 [INFO] scheduler - [1/4] 뉴스 및 트렌딩 키워드 수집 중...
+2026-03-15 22:45:33,914 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 22:45:36,189 [INFO] agents.news_collector - 수집 완료: IT 15개, 전자기기 15개, 경제 15개 → 중복 제거 후 44개
+2026-03-15 22:45:36,672 [INFO] agents.news_collector - 트렌딩 키워드 0개 수집: ...
+2026-03-15 22:45:36,672 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 22:45:36,672 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 22:45:36,883 [INFO] agents.content_writer -   [1/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 22:45:58,387 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:45:58,405 [INFO] agents.content_writer -   완료: AI 시대 IT 취업, 지금 준비 안 하면 뒤진다
+2026-03-15 22:45:58,405 [INFO] agents.content_writer -   [2/4] 전자기기 초안 작성 중 (Haiku)...
+2026-03-15 22:46:24,713 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:46:24,715 [INFO] agents.content_writer -   완료: 대학생 5개 기기 시대, 노트북vs태블릿 선택 완전정복
+2026-03-15 22:46:24,715 [INFO] agents.content_writer -   [3/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:46:47,820 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:46:47,822 [INFO] agents.content_writer -   완료: 국민연금 주식 50% 시대, 개인투자자가 알아야 할 현
+2026-03-15 22:46:47,822 [INFO] agents.content_writer -   [4/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:47:15,910 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:47:15,912 [INFO] agents.content_writer -   완료: 해외주식 광풍, 수수료 전쟁 끝났다…지금 당신이 할 일
+2026-03-15 22:47:15,912 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 1 + 전자기기 1 + 경제 2, 모델: Haiku)
+2026-03-15 22:47:15,912 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 22:47:15,934 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 22:47:15,945 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 22:47:15,957 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 22:47:15,969 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 22:47:15,969 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 22:47:18,366 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 22:47:18,367 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 22:47:18,368 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 22:47:18,371 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 22:47:18,371 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 22:47:18,371 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:47:18,372 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 22:47:18,372 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 22:47:27,271 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:47:37,614 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:47:47,964 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:47:53,886 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:47:54,939 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/answerCallbackQuery "HTTP/1.1 200 OK"
+2026-03-15 22:47:55,376 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:47:56,585 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:47:56,586 [INFO] agents.image_generator - 썸네일 이미지 검색 중 (Pexels): college student tech gadgets, laptop vs tablet comparison, multi-device lifestyle, student electronics, digital device choice
+2026-03-15 22:48:00,002 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/0yNkG3YN/94029bf9d694.jpg
+2026-03-15 22:48:00,435 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:48:01,886 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:48:01,887 [INFO] agents.image_generator - 본문 이미지 [1/7] 검색 중 (Pexels): Korean university students, multiple devices, laptop vs tablet, tech-savvy students, digital lifestyle
+2026-03-15 22:48:05,797 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/0jhdwr6f/3720c1950083.jpg
+2026-03-15 22:48:07,604 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:48:07,605 [INFO] agents.image_generator - 본문 이미지 [2/7] 검색 중 (Pexels): laptop recommendations, student laptop guide, laptop for assignments, laptop for job preparation, college student tech
+2026-03-15 22:48:11,134 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/5XXhnX4G/4f356c7fed71.jpg
+2026-03-15 22:48:12,929 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:48:12,929 [INFO] agents.image_generator - 본문 이미지 [3/7] 검색 중 (Pexels): tablet recommendations, lecture notes, video learning, student devices, tablet vs laptop
+2026-03-15 22:48:16,619 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/gFrvq1Ht/dab0245c6450.jpg
+2026-03-15 22:48:17,656 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:48:17,657 [INFO] agents.image_generator - 본문 이미지 [4/7] 검색 중 (Pexels): student device choice, laptop vs tablet, college student technology, multi-device era, student gadget selection
+2026-03-15 22:48:22,996 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/ds9M2C1J/bd564f158293.jpg
+2026-03-15 22:48:24,387 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:48:24,388 [INFO] agents.image_generator - 본문 이미지 [5/7] 검색 중 (Pexels): electronics pricing 2024, laptop vs tablet comparison, student tech devices, consumer electronics market, gadget price trends
+2026-03-15 22:48:28,013 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/RkB3FpPj/72e2404f09b7.jpg
+2026-03-15 22:48:29,464 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:48:29,465 [INFO] agents.image_generator - 본문 이미지 [6/7] 검색 중 (Pexels): Samsung OneStop Care Service, device maintenance, laptop tablet comparison, student tech setup, device care service
+2026-03-15 22:48:33,187 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/N6zR7zsT/6eb73c4320fd.jpg
+2026-03-15 22:48:34,487 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:48:34,487 [INFO] agents.image_generator - 본문 이미지 [7/7] 검색 중 (Pexels): laptop vs tablet, student tech choice, multi-device era, first purchase guide, college student gadgets
+2026-03-15 22:48:39,352 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/tVjn0W1/95bbce21d9a9.jpg
+2026-03-15 22:48:39,354 [INFO] agents.image_generator - 본문 이미지 삽입 완료: 7/7개
+2026-03-15 22:48:39,355 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:48:40,259 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:48:40,263 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-15 22:48:42,321 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/5-vs.html
+2026-03-15 22:48:42,815 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/editMessageCaption "HTTP/1.1 200 OK"
+2026-03-15 22:48:42,816 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/5-vs.html
+2026-03-15 22:48:49,593 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:48:59,943 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:49:10,302 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:49:20,643 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:49:30,884 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:49:41,126 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:49:51,454 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:50:01,808 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:50:12,053 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:50:22,394 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:50:32,730 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:50:42,970 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:50:53,211 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:51:03,553 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:51:13,897 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:51:24,240 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:51:34,480 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:51:44,721 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:51:55,066 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:52:05,307 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:52:15,645 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:52:25,994 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:52:36,327 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:52:46,567 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:52:56,808 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:53:07,053 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:53:17,292 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:53:27,535 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:53:37,779 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:53:47,745 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-15 22:53:56,935 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-15 22:53:58,161 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getMe "HTTP/1.1 200 OK"
+2026-03-15 22:53:58,162 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:53:58,162 [INFO] telegram.ext.Application - Application started
+2026-03-15 22:53:58,400 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/deleteWebhook "HTTP/1.1 200 OK"
+2026-03-15 22:53:58,401 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-15 22:53:58,401 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-15 22:53:58,401 [INFO] scheduler - [1/4] 뉴스 및 트렌딩 키워드 수집 중...
+2026-03-15 22:53:58,401 [INFO] agents.news_collector - 뉴스 수집 시작
+2026-03-15 22:54:00,923 [INFO] agents.news_collector - 수집 완료: IT 15개, 전자기기 15개, 경제 15개 → 중복 제거 후 44개
+2026-03-15 22:54:01,351 [INFO] agents.news_collector - 트렌딩 키워드 0개 수집: ...
+2026-03-15 22:54:01,351 [INFO] scheduler - [2/4] 글 작성 중...
+2026-03-15 22:54:01,351 [INFO] agents.content_writer - Claude API로 글 작성 시작 (Haiku)
+2026-03-15 22:54:01,571 [INFO] agents.content_writer -   [1/4] IT 초안 작성 중 (Haiku)...
+2026-03-15 22:54:26,926 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:54:26,944 [INFO] agents.content_writer -   완료: 2026년 AI 금융보안, 은행 앱 선택 기준이 바뀐다
+2026-03-15 22:54:26,944 [INFO] agents.content_writer -   [2/4] 전자기기 초안 작성 중 (Haiku)...
+2026-03-15 22:54:56,420 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:54:56,422 [INFO] agents.content_writer -   완료: 2026년 대학생 전자기기 5개 구성법, 노트북vs태블
+2026-03-15 22:54:56,422 [INFO] agents.content_writer -   [3/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:55:26,215 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:55:26,216 [INFO] agents.content_writer -   완료: 2026년 국민연금 주식 50% 시대, 개인투자자가 해
+2026-03-15 22:55:26,217 [INFO] agents.content_writer -   [4/4] 경제 초안 작성 중 (Haiku)...
+2026-03-15 22:55:53,644 [INFO] httpx - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-15 22:55:53,645 [INFO] agents.content_writer -   완료: 2026년 해외주식 투자 시작하기, 수수료·한도 정책 
+2026-03-15 22:55:53,645 [INFO] agents.content_writer - 글 작성 완료: 4개 (IT 1 + 전자기기 1 + 경제 2, 모델: Haiku)
+2026-03-15 22:55:53,645 [INFO] scheduler - [3/4] 썸네일 생성 중...
+2026-03-15 22:55:53,669 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_1.png
+2026-03-15 22:55:53,681 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_2.png
+2026-03-15 22:55:53,693 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_3.png
+2026-03-15 22:55:53,704 [INFO] agents.thumbnail_maker - 썸네일 저장: C:\Users\seokn\Desktop\csn\blogger_auto_project\data\thumbnails\candidate_4.png
+2026-03-15 22:55:53,705 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-15 22:55:55,995 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/sendPhoto "HTTP/1.1 200 OK"
+2026-03-15 22:55:55,996 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-15 22:55:55,998 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-15 22:55:56,000 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-15 22:55:56,000 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-15 22:55:56,001 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-15 22:55:56,001 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-15 22:55:56,001 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-15 22:56:04,970 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:56:15,228 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:56:25,466 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:56:35,703 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:56:45,984 [INFO] httpx - HTTP Request: POST https://api.telegram.org/bot8723872929:AAGkgNrUqpOgHDBwRVmqTKwJIdf1fkRarZk/getUpdates "HTTP/1.1 200 OK"
+2026-03-15 22:56:50,228 [INFO] __main__ - KeyboardInterrupt - 종료

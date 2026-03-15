@@ -1,84 +1,164 @@
 import json
 import logging
 import anthropic
-from config import CLAUDE_API_KEY, CANDIDATE_COUNT
+from config import CLAUDE_API_KEY, IT_COUNT, ELECTRONICS_COUNT, ECONOMY_COUNT
 
 logger = logging.getLogger(__name__)
 
-SYSTEM_PROMPT = """You are a professional Korean IT/economy blogger.
+HAIKU_MODEL = "claude-haiku-4-5-20251001"
+
+SYSTEM_PROMPT = """You are a practical Korean IT/economy blogger who writes honest, helpful reviews and guides.
 Write original blog posts in Korean based on news data.
+
+Core writing style:
+- Be specific, not vague. Mention REAL product model names, prices (원화), specs, and brands.
+- Give concrete recommendations: "이 상황이면 A제품, 저 상황이면 B제품" with reasons.
+- Include actual value comparisons (가성비): price vs performance trade-offs.
+- Use relatable real-life examples that Korean readers identify with (직장인, 대학생, 크리에이터 등).
+- Avoid generic platitudes. Every sentence should give the reader actionable information.
 
 Rules:
 1. Never copy news verbatim (copyright violation)
-2. Use news only as background; add your own perspective and insights
-3. Include practical information readers can apply in daily life
+2. Use news only as background; write as if giving advice to a friend
+3. Mention specific products/models/brands available in Korea where relevant
 4. Write SEO-optimized titles (30-50 Korean characters)
 5. Use HTML format (Blogger-compatible)
-6. Body must be at least 800 Korean characters
+6. Body must be at least 1000 Korean characters
 7. Structure with subheadings (h2, h3)
-8. All output (title, preview, content) must be written in Korean"""
+8. End with a clear recommendation or takeaway section
+9. All output (title, preview, content) must be written in Korean"""
 
-POST_PROMPT_TEMPLATE = """Write {count} blog posts based on the following news. Each post must cover a different topic.
+DRAFT_PROMPT_TEMPLATE = """Write blog post #{post_id} about the {category} category based on the following news.
+Prioritize topics that overlap with the trending keywords. If no overlap, choose the most interesting topic.
+
+Current year: {current_year}. If you mention a year anywhere in the post, it must not be earlier than {current_year}. Do NOT hardcode past years like 2024.
+
+Trending keywords in Korea right now:
+{trending}
 
 News data:
 {news_data}
 
+Already used topics (do NOT overlap): {used_topics}
+
+IMPORTANT content guidelines:
+- If the topic involves products (laptops, phones, tablets, etc.): name at least 3 specific models with approximate Korean market prices and key pros/cons of each.
+- If the topic is a comparison/recommendation: give a clear verdict per use case (e.g., 대학생 → XX, 직장인 → YY).
+- If the topic is IT/economy news: explain the real-world impact on Korean consumers and give practical advice.
+- Do NOT just describe what exists — tell readers what to DO with that information.
+
 Respond with JSON only (no other text):
-[
-  {{
-    "id": 1,
-    "title": "SEO-optimized Korean title",
-    "category": "IT or 경제",
-    "keywords": ["keyword1", "keyword2", "keyword3"],
-    "preview": "2-3 sentence Korean preview",
-    "content_html": "<h2>subheading</h2><p>Korean body...</p>"
-  }},
-  ...
-]"""
+{{
+  "id": {post_id},
+  "title": "SEO-optimized Korean title",
+  "category": "{category}",
+  "keywords": ["keyword1", "keyword2", "keyword3"],
+  "preview": "2-3 sentence Korean preview",
+  "content_html": "<h2>subheading</h2><p>Korean body...</p>"
+}}"""
 
 
-def _format_news_for_prompt(news_list: list[dict]) -> str:
+def _format_news_for_prompt(news_list: list[dict], category: str) -> str:
     lines = []
-    for i, news in enumerate(news_list, 1):
-        lines.append(f"[{i}] [{news['category']}] {news['title']}")
+    for i, news in enumerate(
+        [n for n in news_list if n["category"] == category], 1
+    ):
+        lines.append(f"[{i}] {news['title']}")
         if news.get("summary"):
             lines.append(f"    요약: {news['summary'][:200]}")
     return "\n".join(lines)
 
 
-def write(news_list: list[dict]) -> list[dict]:
-    """뉴스 리스트를 받아 Claude API로 블로그 후보 글 3개 작성."""
-    logger.info("Claude API로 글 작성 시작")
-    client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
+def _escape_control_chars(text: str) -> str:
+    """JSON 문자열 값 내부의 literal 제어 문자(개행 등)를 이스케이프."""
+    result = []
+    in_string = False
+    escape_next = False
+    for char in text:
+        if escape_next:
+            result.append(char)
+            escape_next = False
+        elif char == "\\":
+            result.append(char)
+            escape_next = True
+        elif char == '"':
+            result.append(char)
+            in_string = not in_string
+        elif in_string and char == "\n":
+            result.append("\\n")
+        elif in_string and char == "\r":
+            result.append("\\r")
+        elif in_string and char == "\t":
+            result.append("\\t")
+        else:
+            result.append(char)
+    return "".join(result)
 
-    news_text = _format_news_for_prompt(news_list)
-    user_prompt = POST_PROMPT_TEMPLATE.format(
-        count=CANDIDATE_COUNT,
+
+def _parse_json(response_text: str) -> dict:
+    if response_text.startswith("```"):
+        response_text = response_text.split("```")[1]
+        if response_text.startswith("json"):
+            response_text = response_text[4:]
+        response_text = response_text.strip()
+    response_text = _escape_control_chars(response_text)
+    return json.loads(response_text)
+
+
+def _write_draft(client: anthropic.Anthropic, post_id: int, category: str,
+                 news_text: str, used_topics: list[str], trending: list[str]) -> dict:
+    """Haiku 모델로 초안 작성."""
+    from datetime import date
+    current_year = date.today().year
+    user_prompt = DRAFT_PROMPT_TEMPLATE.format(
+        current_year=current_year,
+        post_id=post_id,
+        category=category,
         news_data=news_text,
+        used_topics=", ".join(used_topics) if used_topics else "없음",
+        trending=", ".join(trending) if trending else "없음",
     )
-
     message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=8192,
+        model=HAIKU_MODEL,
+        max_tokens=4096,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user_prompt}],
     )
+    return _parse_json(message.content[0].text.strip())
 
-    response_text = message.content[0].text.strip()
 
-    # JSON 파싱
-    try:
-        # ```json ... ``` 블록이 있으면 제거
-        if response_text.startswith("```"):
-            response_text = response_text.split("```")[1]
-            if response_text.startswith("json"):
-                response_text = response_text[4:]
-            response_text = response_text.strip()
 
-        candidates = json.loads(response_text)
-    except json.JSONDecodeError as e:
-        logger.error(f"JSON 파싱 실패: {e}\n응답: {response_text[:500]}")
-        raise
+def write(news_list: list[dict], trending: list[str] | None = None) -> list[dict]:
+    """IT 1 + 전자기기 1 + 경제 2 총 4개 후보 작성. Haiku 모델 사용."""
+    logger.info("Claude API로 글 작성 시작 (Haiku)")
+    trending = trending or []
+    client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
 
-    logger.info(f"글 작성 완료: {len(candidates)}개")
+    it_news = _format_news_for_prompt(news_list, "IT")
+    electronics_news = _format_news_for_prompt(news_list, "전자기기")
+    economy_news = _format_news_for_prompt(news_list, "경제")
+
+    plan = (
+        [(i + 1, "IT", it_news) for i in range(IT_COUNT)] +
+        [(IT_COUNT + i + 1, "전자기기", electronics_news) for i in range(ELECTRONICS_COUNT)] +
+        [(IT_COUNT + ELECTRONICS_COUNT + i + 1, "경제", economy_news) for i in range(ECONOMY_COUNT)]
+    )
+
+    candidates = []
+    used_topics: list[str] = []
+
+    total = IT_COUNT + ELECTRONICS_COUNT + ECONOMY_COUNT
+    for post_id, category, news_text in plan:
+        logger.info(f"  [{post_id}/{total}] {category} 초안 작성 중 (Haiku)...")
+        try:
+            draft = _write_draft(client, post_id, category, news_text, used_topics, trending)
+        except (json.JSONDecodeError, Exception) as e:
+            logger.error(f"글 {post_id} 초안 실패: {e}")
+            raise
+
+        candidates.append(draft)
+        used_topics.append(draft.get("title", f"post{post_id}"))
+        logger.info(f"  완료: {draft.get('title', '')[:30]}")
+
+    logger.info(f"글 작성 완료: {len(candidates)}개 (IT {IT_COUNT} + 전자기기 {ELECTRONICS_COUNT} + 경제 {ECONOMY_COUNT}, 모델: Haiku)")
     return candidates

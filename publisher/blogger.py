@@ -37,10 +37,14 @@ def get_credentials() -> Credentials:
     return creds
 
 
-def publish_post(title: str, content_html: str, labels: list[str] | None = None, is_draft: bool = False) -> dict:
+def publish_post(title: str, content_html: str, labels: list[str] | None = None, is_draft: bool = False, thumbnail_url: str | None = None) -> dict:
     """Blogger에 글 발행."""
     creds = get_credentials()
     service = build("blogger", "v3", credentials=creds)
+
+    if thumbnail_url:
+        img_tag = f'<div style="text-align:center;margin-bottom:24px;"><img src="{thumbnail_url}" alt="{title}" style="max-width:100%;height:auto;border-radius:8px;"/></div>\n'
+        content_html = img_tag + content_html
 
     post_body = {
         "title": title,

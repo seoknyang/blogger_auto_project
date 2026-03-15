@@ -3,7 +3,7 @@ import logging
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 
-from agents.news_collector import collect
+from agents.news_collector import collect, fetch_trending_keywords
 from agents.content_writer import write
 from agents.thumbnail_maker import generate_thumbnails
 from agents.pm_agent import send_candidates
@@ -16,16 +16,17 @@ async def run_daily_pipeline():
     """매일 09:00 KST 실행되는 자동화 파이프라인."""
     logger.info("=== 일일 파이프라인 시작 ===")
     try:
-        # 1. 뉴스 수집
-        logger.info("[1/4] 뉴스 수집 중...")
+        # 1. 뉴스 + 트렌딩 키워드 수집
+        logger.info("[1/4] 뉴스 및 트렌딩 키워드 수집 중...")
         news_list = collect()
         if not news_list:
             logger.error("뉴스 수집 실패 - 파이프라인 중단")
             return
+        trending = fetch_trending_keywords()
 
         # 2. Claude API로 글 작성
         logger.info("[2/4] 글 작성 중...")
-        candidates = write(news_list)
+        candidates = write(news_list, trending=trending)
         if not candidates:
             logger.error("글 작성 실패 - 파이프라인 중단")
             return
