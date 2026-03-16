@@ -120,7 +120,7 @@ def _write_draft(client: anthropic.Anthropic, post_id: int, category: str,
     )
     message = client.messages.create(
         model=HAIKU_MODEL,
-        max_tokens=4096,
+        max_tokens=8192,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user_prompt}],
     )
@@ -154,7 +154,7 @@ def write(news_list: list[dict], trending: list[str] | None = None) -> list[dict
             draft = _write_draft(client, post_id, category, news_text, used_topics, trending)
         except (json.JSONDecodeError, Exception) as e:
             logger.error(f"글 {post_id} 초안 실패: {e}")
-            raise
+            continue
 
         candidates.append(draft)
         used_topics.append(draft.get("title", f"post{post_id}"))
