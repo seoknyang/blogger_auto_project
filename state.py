@@ -8,13 +8,15 @@ def _ensure_data_dir():
     os.makedirs(DATA_DIR, exist_ok=True)
 
 
-def save_candidates(candidates: list[dict]):
-    """후보 글 3개를 파일에 저장."""
+def save_candidates(candidates: list[dict], news_list: list[dict] | None = None, trending: list[str] | None = None):
+    """후보 글을 파일에 저장. 글 작성에 필요한 뉴스와 트렌딩 키워드도 함께 저장."""
     _ensure_data_dir()
     data = {
         "date": str(date.today()),
         "candidates": candidates,
         "selected": None,
+        "news_list": news_list or [],
+        "trending": trending or [],
     }
     with open(CANDIDATES_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
@@ -51,6 +53,14 @@ def mark_selected(candidate_id: int):
     data["selected"] = candidate_id
     with open(CANDIDATES_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def get_news_and_trending() -> tuple[list[dict], list[str]]:
+    """저장된 뉴스 목록과 트렌딩 키워드 반환."""
+    data = load_candidates()
+    if not data:
+        return [], []
+    return data.get("news_list", []), data.get("trending", [])
 
 
 def clear_candidates():

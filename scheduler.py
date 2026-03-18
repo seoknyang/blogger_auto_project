@@ -4,8 +4,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 
 from agents.news_collector import collect, fetch_trending_keywords
-from agents.content_writer import write
-from agents.thumbnail_maker import generate_thumbnails
+from agents.content_writer import plan_candidates
 from agents.pm_agent import send_candidates
 import state
 
@@ -17,29 +16,25 @@ async def run_daily_pipeline():
     logger.info("=== 일일 파이프라인 시작 ===")
     try:
         # 1. 트렌딩 키워드 수집 → 트렌딩 기반 뉴스 수집
-        logger.info("[1/4] 트렌딩 키워드 수집 중...")
+        logger.info("[1/3] 트렌딩 키워드 수집 중...")
         trending = fetch_trending_keywords()
 
-        logger.info("[1/4] 트렌딩 키워드 기반 뉴스 수집 중...")
+        logger.info("[1/3] 트렌딩 키워드 기반 뉴스 수집 중...")
         news_list = collect(trending=trending)
         if not news_list:
             logger.error("뉴스 수집 실패 - 파이프라인 중단")
             return
 
-        # 2. Claude API로 글 작성
-        logger.info("[2/4] 글 작성 중...")
-        candidates = write(news_list, trending=trending)
+        # 2. 후보 제목/키워드/미리보기만 선정 (본문 미작성)
+        logger.info("[2/3] 후보 선정 중 (제목/키워드만)...")
+        candidates = plan_candidates(news_list, trending=trending)
         if not candidates:
-            logger.error("글 작성 실패 - 파이프라인 중단")
+            logger.error("후보 선정 실패 - 파이프라인 중단")
             return
 
-        # 3. 썸네일 생성
-        logger.info("[3/4] 썸네일 생성 중...")
-        candidates = generate_thumbnails(candidates)
-
-        # 4. 상태 저장 + 텔레그램 발송
-        logger.info("[4/4] 텔레그램 발송 중...")
-        state.save_candidates(candidates)
+        # 3. 상태 저장 (뉴스+트렌딩 포함) + 텔레그램 발송
+        logger.info("[3/3] 텔레그램 발송 중...")
+        state.save_candidates(candidates, news_list=news_list, trending=trending)
         await send_candidates(candidates)
 
         logger.info("=== 파이프라인 완료 ===")

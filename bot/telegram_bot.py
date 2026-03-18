@@ -6,6 +6,7 @@ import state
 from publisher.blogger import publish_post
 from agents.thumbnail_maker import upload_to_imgbb
 from agents.image_generator import generate_thumbnail_url, inject_content_images
+from agents.content_writer import write_single
 
 logger = logging.getLogger(__name__)
 
@@ -43,10 +44,15 @@ async def _handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await edit_msg("후보를 찾을 수 없습니다. 오늘 후보가 만료되었을 수 있습니다.")
             return
 
-        await edit_msg(f"⏳ {candidate['title']}\n\n이미지 생성 중...")
+        await edit_msg(f"⏳ {candidate['title']}\n\n글 작성 중...")
 
         try:
+            # 0. 본문 작성 (선택 시점에 Claude API 호출)
+            news_list, trending = state.get_news_and_trending()
+            candidate = write_single(candidate, news_list, trending)
+
             # 1. 썸네일 이미지 검색 (실패 시 PIL 썸네일 fallback)
+            await edit_msg(f"⏳ {candidate['title']}\n\n이미지 생성 중...")
             used_urls: set[str] = set()
             thumbnail_url = generate_thumbnail_url(
                 title=candidate["title"],
