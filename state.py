@@ -1,7 +1,7 @@
 import json
 import os
-from datetime import date
-from config import CANDIDATES_FILE, DATA_DIR
+from datetime import date, timedelta
+from config import CANDIDATES_FILE, PUBLISHED_TOPICS_FILE, DATA_DIR
 
 
 def _ensure_data_dir():
@@ -67,3 +67,25 @@ def clear_candidates():
     """발행 완료 후 후보 파일 삭제."""
     if os.path.exists(CANDIDATES_FILE):
         os.remove(CANDIDATES_FILE)
+
+
+def save_published_topic(title: str):
+    """발행된 글 제목을 이력 파일에 저장."""
+    _ensure_data_dir()
+    records = []
+    if os.path.exists(PUBLISHED_TOPICS_FILE):
+        with open(PUBLISHED_TOPICS_FILE, "r", encoding="utf-8") as f:
+            records = json.load(f)
+    records.append({"date": str(date.today()), "title": title})
+    with open(PUBLISHED_TOPICS_FILE, "w", encoding="utf-8") as f:
+        json.dump(records, f, ensure_ascii=False, indent=2)
+
+
+def load_published_topics(days: int = 30) -> list[str]:
+    """최근 N일간 발행된 글 제목 목록 반환."""
+    if not os.path.exists(PUBLISHED_TOPICS_FILE):
+        return []
+    with open(PUBLISHED_TOPICS_FILE, "r", encoding="utf-8") as f:
+        records = json.load(f)
+    cutoff = str(date.today() - timedelta(days=days))
+    return [r["title"] for r in records if r.get("date", "") >= cutoff]

@@ -7,6 +7,7 @@ from agents.news_collector import collect, fetch_trending_keywords
 from agents.content_writer import plan_candidates
 from agents.pm_agent import send_candidates
 import state
+from state import load_published_topics
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +28,10 @@ async def run_daily_pipeline():
 
         # 2. 후보 제목/키워드/미리보기만 선정 (본문 미작성)
         logger.info("[2/3] 후보 선정 중 (제목/키워드만)...")
-        candidates = plan_candidates(news_list, trending=trending)
+        prior_topics = load_published_topics(days=30)
+        if prior_topics:
+            logger.info(f"  최근 30일 발행 이력 {len(prior_topics)}개 제외 적용")
+        candidates = plan_candidates(news_list, trending=trending, prior_topics=prior_topics)
         if not candidates:
             logger.error("후보 선정 실패 - 파이프라인 중단")
             return
@@ -48,7 +52,7 @@ def create_scheduler() -> AsyncIOScheduler:
     scheduler = AsyncIOScheduler()
     scheduler.add_job(
         run_daily_pipeline,
-        trigger=CronTrigger(hour=15, minute=0, timezone="Asia/Seoul"),
+        trigger=CronTrigger(hour=16, minute=0, timezone="Asia/Seoul"),
         id="daily_pipeline",
         name="일일 블로그 자동화",
         replace_existing=True,

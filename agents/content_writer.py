@@ -46,8 +46,7 @@ Respond with JSON only (no other text):
   "id": {post_id},
   "title": "SEO-optimized Korean title (30-50 characters)",
   "category": "{category}",
-  "keywords": ["keyword1", "keyword2", "keyword3"],
-  "preview": "2-3 sentence Korean preview of what the post will cover"
+  "keywords": ["keyword1", "keyword2", "keyword3"]
 }}"""
 
 DRAFT_PROMPT_TEMPLATE = """Write blog post #{post_id} about the {category} category based on the following news.
@@ -200,11 +199,14 @@ def _plan_candidate(client: anthropic.Anthropic, post_id: int, category: str,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user_prompt}],
     )
-    return _parse_json(message.content[0].text.strip())
+    result = _parse_json(message.content[0].text.strip())
+    result["id"] = post_id  # Haiku가 임의 id를 반환할 수 있으므로 강제 지정
+    return result
 
 
 
-def plan_candidates(news_list: list[dict], trending: list[str] | None = None) -> list[dict]:
+def plan_candidates(news_list: list[dict], trending: list[str] | None = None,
+                    prior_topics: list[str] | None = None) -> list[dict]:
     """IT 1 + 전자기기 1 + 경제 2 총 4개 후보 제목/키워드/미리보기만 선정. 본문은 미작성."""
     logger.info("Claude API로 후보 선정 시작 (Haiku) - 제목/키워드만")
     trending = trending or []
@@ -221,7 +223,7 @@ def plan_candidates(news_list: list[dict], trending: list[str] | None = None) ->
     )
 
     candidates = []
-    used_topics: list[str] = []
+    used_topics: list[str] = list(prior_topics or [])
 
     total = IT_COUNT + ELECTRONICS_COUNT + ECONOMY_COUNT
     for post_id, category, news_text in plan:

@@ -79,6 +79,7 @@ async def _handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 thumbnail_url=thumbnail_url,
             )
             post_url = post.get("url", "")
+            state.save_published_topic(candidate["title"])
             state.mark_selected(candidate_id)
             state.clear_candidates()
 

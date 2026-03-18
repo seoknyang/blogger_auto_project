@@ -6,16 +6,12 @@ from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
 logger = logging.getLogger(__name__)
 
-MIN_PREVIEW_LENGTH = 20  # 최소 미리보기 글자 수
-
-
 def _quality_check(candidates: list[dict]) -> list[dict]:
-    """최소 품질 기준 미달 후보 필터링."""
+    """제목 존재 여부 기준 필터링."""
     passed = []
     for c in candidates:
-        preview_len = len(c.get("preview", ""))
-        if preview_len < MIN_PREVIEW_LENGTH:
-            logger.warning(f"후보 {c['id']} 품질 미달 (미리보기 {preview_len}자) - 제외")
+        if not c.get("title", "").strip():
+            logger.warning(f"후보 {c['id']} 제목 없음 - 제외")
             continue
         passed.append(c)
     return passed
@@ -26,15 +22,14 @@ def _build_message(candidates: list[dict]) -> str:
     lines = [f"📢 *오늘의 블로그 후보* ({today})\n"]
     for c in candidates:
         lines.append(f"*[{c['id']}번]* {c['category']} | {c['title']}")
-        lines.append(f"{c.get('preview', '')}\n")
-    lines.append("👇 발행할 글을 선택하세요")
+    lines.append("\n👇 발행할 글을 선택하세요")
     return "\n".join(lines)
 
 
 def _build_keyboard(candidates: list[dict]) -> InlineKeyboardMarkup:
     buttons = [
         InlineKeyboardButton(f"{c['id']}번 선택", callback_data=f"select_{c['id']}")
-        for c in candidates
+        for c in sorted(candidates, key=lambda x: x["id"])
     ]
     skip_btn = InlineKeyboardButton("오늘 건너뜀", callback_data="skip")
     # 2개씩 묶어서 2x2 그리드, 건너뜀 버튼 별도 줄
