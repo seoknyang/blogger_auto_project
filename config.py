@@ -25,6 +25,6 @@ ECONOMY_COUNT = 2
 # 파일 경로
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 CANDIDATES_FILE = os.path.join(DATA_DIR, "candidates.json")
-PUBLISHED_TOPICS_FILE = os.path.join(DATA_DIR, "published_topics.json")
+PUBLISHED_TOPICS_FILE = os.path.join(os.path.dirname(__file__), "published_topics.json")
 THUMBNAILS_DIR = os.path.join(DATA_DIR, "thumbnails")
 FONT_PATH = os.path.join(os.path.dirname(__file__), "assets", "fonts", "NanumGothicBold.ttf")

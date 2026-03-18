@@ -52,7 +52,7 @@ def create_scheduler() -> AsyncIOScheduler:
     scheduler = AsyncIOScheduler()
     scheduler.add_job(
         run_daily_pipeline,
-        trigger=CronTrigger(hour=16, minute=0, timezone="Asia/Seoul"),
+        trigger=CronTrigger(hour=16, minute=15, timezone="Asia/Seoul"),
         id="daily_pipeline",
         name="일일 블로그 자동화",
         replace_existing=True,
