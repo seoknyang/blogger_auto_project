@@ -15,18 +15,25 @@ Core writing style:
 - Give concrete recommendations: "이 상황이면 A제품, 저 상황이면 B제품" with reasons.
 - Include actual value comparisons (가성비): price vs performance trade-offs.
 - Use relatable real-life examples that Korean readers identify with (직장인, 대학생, 크리에이터 등).
-- Avoid generic platitudes. Every sentence should give the reader actionable information.
+- Avoid generic platitudes. Every sentence should share useful insights or suggestions the reader can consider.
 
 Rules:
 1. Never copy news verbatim (copyright violation)
 2. Use news only as background; write as if giving advice to a friend
 3. Mention specific products/models/brands available in Korea where relevant
 4. Write SEO-optimized titles (30-50 Korean characters)
-5. Use HTML format (Blogger-compatible)
+5. Use HTML format (Blogger-compatible) — every paragraph must be wrapped in <p> tags, never bare text
 6. Body must be at least 1000 Korean characters
-7. Structure with subheadings (h2, h3)
-8. End with a clear recommendation or takeaway section
-9. All output (title, preview, content) must be written in Korean"""
+7. Structure with subheadings (h2, h3) — add a relevant emoji at the start of each h2/h3 (e.g., 💡 📌 🔍 ✅ 🏆 📊 💰 🛒 ⚡)
+8. End with a soft recommendation or takeaway section — use suggestive tone (e.g., "~해보시는 것도 좋을 것 같습니다", "~을 추천드립니다", "~을 고려해보시면 어떨까요") rather than imperative commands (e.g., "~하세요", "~해야 합니다")
+9. All output (title, preview, content) must be written in Korean
+
+HTML formatting rules (MUST follow):
+- Numbered lists (첫째/둘째/셋째 or ①②③): wrap the label in <strong style="color:#1a73e8;">첫째,</strong> (use blue #1a73e8 for the label only)
+- For product/feature comparison rows, use a styled callout box: <div style="background:#f8f9fa;border-left:4px solid #1a73e8;padding:12px 16px;margin:12px 0;border-radius:4px;">내용</div>
+- For key terms or emphasis mid-sentence: use <strong style="color:#e8710a;">핵심단어</strong> (orange) sparingly (max 2-3 per post)
+- Use <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;"> between major sections to visually separate them
+- Do NOT make entire paragraphs colored — only labels/keywords get color styling"""
 
 PLAN_PROMPT_TEMPLATE = """Select the best blog post topic for the {category} category based on the following news.
 Prioritize topics overlapping with trending keywords. If no overlap, pick the most interesting topic.
@@ -66,7 +73,16 @@ IMPORTANT content guidelines:
 - If the topic involves products (laptops, phones, tablets, etc.): name at least 3 specific models with approximate Korean market prices and key pros/cons of each.
 - If the topic is a comparison/recommendation: give a clear verdict per use case (e.g., 대학생 → XX, 직장인 → YY).
 - If the topic is IT/economy news: explain the real-world impact on Korean consumers and give practical advice.
-- Do NOT just describe what exists — tell readers what to DO with that information.
+- Do NOT just describe what exists — offer practical suggestions and recommendations readers can consider for their situation.
+
+HTML formatting (MUST apply):
+- Paragraphs: wrap every paragraph in <p> tags — NEVER write bare text without <p>. Each logical idea = one <p> block.
+- h2/h3 subheadings: start with a relevant emoji (e.g., 💡 📌 🔍 ✅ 🏆 📊 💰 🛒 ⚡)
+- Numbered labels (첫째/둘째/셋째 or ①②③): <strong style="color:#1a73e8;">첫째,</strong>
+- Key callout/summary boxes: <div style="background:#f8f9fa;border-left:4px solid #1a73e8;padding:12px 16px;margin:12px 0;border-radius:4px;">내용</div>
+- Key terms mid-sentence (max 2-3): <strong style="color:#e8710a;">핵심단어</strong>
+- Section dividers between major h2 blocks: <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;">
+- Do NOT color entire paragraphs — only labels and key terms
 
 Respond with JSON only (no other text):
 {{
@@ -75,7 +91,7 @@ Respond with JSON only (no other text):
   "category": "{category}",
   "keywords": ["keyword1", "keyword2", "keyword3"],
   "preview": "2-3 sentence Korean preview",
-  "content_html": "<h2>subheading</h2><p>Korean body...</p>"
+  "content_html": "<h2>💡 소제목</h2><p>첫 번째 문단 내용...</p><p>두 번째 문단 내용...</p><hr style=\"border:none;border-top:1px solid #e0e0e0;margin:24px 0;\"><h2>📌 다음 소제목</h2><p>내용...</p>"
 }}"""
 
 WRITE_PROMPT_TEMPLATE = """Write a full blog post for this planned topic.
@@ -97,7 +113,16 @@ Content guidelines:
 - If comparison/recommendation: give verdict per use case (대학생, 직장인, 크리에이터 등).
 - If IT/economy news: explain real-world impact on Korean consumers with practical advice.
 - Body must be at least 1000 Korean characters.
-- Use h2/h3 subheadings, end with a clear recommendation or takeaway.
+- Use h2/h3 subheadings, end with a soft recommendation or takeaway using suggestive tone (e.g., "~해보시는 것도 좋을 것 같습니다", "~을 추천드립니다"), not imperative commands.
+
+HTML formatting (MUST apply):
+- Paragraphs: wrap every paragraph in <p> tags — NEVER write bare text without <p>. Each logical idea = one <p> block.
+- h2/h3 subheadings: start with a relevant emoji (e.g., 💡 📌 🔍 ✅ 🏆 📊 💰 🛒 ⚡)
+- Numbered labels (첫째/둘째/셋째 or ①②③): <strong style="color:#1a73e8;">첫째,</strong>
+- Key callout/summary boxes: <div style="background:#f8f9fa;border-left:4px solid #1a73e8;padding:12px 16px;margin:12px 0;border-radius:4px;">내용</div>
+- Key terms mid-sentence (max 2-3): <strong style="color:#e8710a;">핵심단어</strong>
+- Section dividers between major h2 blocks: <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;">
+- Do NOT color entire paragraphs — only labels and key terms
 
 Respond with JSON only (no other text):
 {{
@@ -106,7 +131,7 @@ Respond with JSON only (no other text):
   "category": "{category}",
   "keywords": ["keyword1", "keyword2", "keyword3"],
   "preview": "2-3 sentence Korean preview",
-  "content_html": "<h2>subheading</h2><p>Korean body...</p>"
+  "content_html": "<h2>💡 소제목</h2><p>첫 번째 문단 내용...</p><p>두 번째 문단 내용...</p><hr style=\"border:none;border-top:1px solid #e0e0e0;margin:24px 0;\"><h2>📌 다음 소제목</h2><p>내용...</p>"
 }}"""
 
 
