@@ -3,7 +3,13 @@ import feedparser
 import logging
 from datetime import datetime, timezone
 from urllib.parse import quote_plus
-from config import GOOGLE_NEWS_IT_URL, GOOGLE_NEWS_ECONOMY_URL, GOOGLE_NEWS_ELECTRONICS_URL, NEWS_PER_CATEGORY
+from config import (
+    GOOGLE_NEWS_IT_URL, GOOGLE_NEWS_ECONOMY_URL, GOOGLE_NEWS_ELECTRONICS_URL,
+    GOOGLE_NEWS_LIFE_URL, GOOGLE_NEWS_WORLD_URL, GOOGLE_NEWS_SOCIETY_URL,
+    NAVER_NEWS_IT_URL, NAVER_NEWS_ECONOMY_URL, NAVER_NEWS_SOCIETY_URL,
+    NAVER_NEWS_LIFE_URL, NAVER_NEWS_WORLD_URL,
+    NEWS_PER_CATEGORY, CATEGORY_SCHEDULE,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -29,12 +35,40 @@ _ECONOMY_HINTS = {
     "코인", "비트코인", "암호화폐", "Fed", "연준", "한국은행", "나스닥",
     "s&p500",
 }
+_LIFE_HINTS = {
+    "음식", "맛집", "레시피", "건강", "다이어트", "운동", "여행", "패션",
+    "뷰티", "육아", "결혼", "인테리어", "반려동물", "취미", "문화", "영화",
+    "드라마", "음악", "공연", "전시", "책", "독서", "카페", "라이프스타일",
+}
+_WORLD_HINTS = {
+    "미국", "중국", "일본", "유럽", "러시아", "북한", "외교", "국제",
+    "UN", "NATO", "G7", "G20", "전쟁", "분쟁", "제재", "조약",
+    "트럼프", "바이든", "시진핑", "푸틴", "글로벌", "세계",
+}
+_SOCIETY_HINTS = {
+    "사회", "정치", "정부", "국회", "대통령", "여당", "야당", "법원",
+    "검찰", "경찰", "사건", "사고", "재난", "환경", "기후", "교육",
+    "복지", "고용", "취업", "인구", "저출생", "고령화", "의료", "병원",
+}
 
-# 카테고리별 폴백 쿼리 (트렌딩 매칭 실패 시)
-_FALLBACK = {
-    "IT": GOOGLE_NEWS_IT_URL,
-    "전자기기": GOOGLE_NEWS_ELECTRONICS_URL,
-    "경제": GOOGLE_NEWS_ECONOMY_URL,
+# 카테고리별 소스 정의: (구글폴백URL, 네이버RSS URL or None)
+_SOURCES = {
+    "IT":       (GOOGLE_NEWS_IT_URL,          NAVER_NEWS_IT_URL),
+    "전자기기": (GOOGLE_NEWS_ELECTRONICS_URL, None),
+    "경제":     (GOOGLE_NEWS_ECONOMY_URL,     NAVER_NEWS_ECONOMY_URL),
+    "생활문화": (GOOGLE_NEWS_LIFE_URL,        NAVER_NEWS_LIFE_URL),
+    "세계":     (GOOGLE_NEWS_WORLD_URL,       NAVER_NEWS_WORLD_URL),
+    "사회":     (GOOGLE_NEWS_SOCIETY_URL,     NAVER_NEWS_SOCIETY_URL),
+}
+
+# 트렌딩 분류용 힌트 맵
+_HINTS_MAP = {
+    "IT":       _IT_HINTS,
+    "전자기기": _ELECTRONICS_HINTS,
+    "경제":     _ECONOMY_HINTS,
+    "생활문화": _LIFE_HINTS,
+    "세계":     _WORLD_HINTS,
+    "사회":     _SOCIETY_HINTS,
 }
 
 
@@ -71,28 +105,20 @@ def _build_rss_url(query: str) -> str:
     return f"https://news.google.com/rss/search?q={quote_plus(query)}&hl=ko&gl=KR&ceid=KR:ko"
 
 
-def _categorize_trending(keywords: list[str]) -> dict[str, list[str]]:
-    """트렌딩 키워드를 IT/전자기기/경제 버킷으로 분류."""
-    buckets: dict[str, list[str]] = {"IT": [], "전자기기": [], "경제": []}
+def _categorize_trending(keywords: list[str], categories: list[str]) -> dict[str, list[str]]:
+    """트렌딩 키워드를 오늘의 활성 카테고리 버킷으로 분류."""
+    buckets: dict[str, list[str]] = {cat: [] for cat in categories}
+    # 분류 우선순위: 전자기기 → IT → 나머지
+    priority = ["전자기기", "IT"] + [c for c in categories if c not in ("전자기기", "IT")]
     for kw in keywords:
         kw_upper = kw.upper()
-        matched = False
-        for hint in _ELECTRONICS_HINTS:
-            if hint.upper() in kw_upper:
-                buckets["전자기기"].append(kw)
-                matched = True
+        for cat in priority:
+            if cat not in buckets:
+                continue
+            hints = _HINTS_MAP.get(cat, set())
+            if any(hint.upper() in kw_upper for hint in hints):
+                buckets[cat].append(kw)
                 break
-        if not matched:
-            for hint in _IT_HINTS:
-                if hint.upper() in kw_upper:
-                    buckets["IT"].append(kw)
-                    matched = True
-                    break
-        if not matched:
-            for hint in _ECONOMY_HINTS:
-                if hint.upper() in kw_upper:
-                    buckets["경제"].append(kw)
-                    break
     return buckets
 
 
@@ -110,40 +136,59 @@ def fetch_trending_keywords(limit: int = 20) -> list[str]:
         return []
 
 
-def collect(trending: list[str] | None = None) -> list[dict]:
-    """IT/전자기기/경제 뉴스 수집. 트렌딩 키워드가 있으면 동적 URL로 검색."""
-    logger.info("뉴스 수집 시작")
+def get_today_schedule() -> list[tuple[str, int]]:
+    """오늘 요일에 맞는 카테고리 스케줄 반환. [(카테고리, 후보수), ...]"""
+    from datetime import date
+    return CATEGORY_SCHEDULE[date.today().weekday()]
 
+
+def collect(trending: list[str] | None = None) -> list[dict]:
+    """오늘 스케줄 카테고리 뉴스 수집. 구글 + 네이버 RSS 병합."""
+    schedule = get_today_schedule()
+    categories = [cat for cat, _ in schedule]
+    logger.info(f"뉴스 수집 시작 — 오늘 카테고리: {categories}")
+
+    buckets = _categorize_trending(trending, categories) if trending else {cat: [] for cat in categories}
     if trending:
-        buckets = _categorize_trending(trending)
-        logger.info(
-            f"트렌딩 분류 → IT: {buckets['IT'][:3]}, "
-            f"전자기기: {buckets['전자기기'][:3]}, 경제: {buckets['경제'][:3]}"
-        )
-    else:
-        buckets = {"IT": [], "전자기기": [], "경제": []}
+        logger.info(f"트렌딩 분류 → " + ", ".join(f"{c}: {buckets[c][:2]}" for c in categories))
+
+    per_source = max(8, NEWS_PER_CATEGORY // 2)
 
     def _fetch(category: str) -> list[dict]:
+        results = []
+        google_fallback, naver_url = _SOURCES.get(category, (None, None))
+
+        # 네이버 RSS
+        if naver_url:
+            naver_items = _parse_feed(naver_url, category, per_source)
+            logger.info(f"  [{category}] 네이버 RSS: {len(naver_items)}개")
+            results.extend(naver_items)
+
+        # 구글 RSS (트렌딩 키워드 있으면 동적, 없으면 폴백)
         kws = buckets.get(category, [])
         if kws:
-            # 상위 3개 키워드로 OR 쿼리
             query = " OR ".join(kws[:3])
-            url = _build_rss_url(query)
-            logger.info(f"  [{category}] 트렌딩 쿼리: {query}")
+            google_url = _build_rss_url(query)
+            logger.info(f"  [{category}] 구글 트렌딩 쿼리: {query}")
         else:
-            url = _FALLBACK[category]
-            logger.info(f"  [{category}] 폴백 URL 사용")
-        return _parse_feed(url, category, NEWS_PER_CATEGORY)
+            google_url = google_fallback
+            logger.info(f"  [{category}] 구글 폴백 URL 사용")
 
-    it_news = _fetch("IT")
-    electronics_news = _fetch("전자기기")
-    economy_news = _fetch("경제")
+        if google_url:
+            google_items = _parse_feed(google_url, category, per_source)
+            logger.info(f"  [{category}] 구글 RSS: {len(google_items)}개")
+            results.extend(google_items)
 
-    all_news = it_news + electronics_news + economy_news
+        return results
+
+    all_news = []
+    counts = {}
+    for category in categories:
+        items = _fetch(category)
+        counts[category] = len(items)
+        all_news.extend(items)
+
     all_news = _deduplicate(all_news)
-
-    logger.info(
-        f"수집 완료: IT {len(it_news)}개, 전자기기 {len(electronics_news)}개, "
-        f"경제 {len(economy_news)}개 → 중복 제거 후 {len(all_news)}개"
-    )
+    count_str = ", ".join(f"{c} {n}개" for c, n in counts.items())
+    logger.info(f"수집 완료: {count_str} → 중복 제거 후 {len(all_news)}개")
     return all_news

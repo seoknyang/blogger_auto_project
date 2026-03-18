@@ -1,7 +1,7 @@
 import json
 import logging
 import anthropic
-from config import CLAUDE_API_KEY, IT_COUNT, ELECTRONICS_COUNT, ECONOMY_COUNT
+from config import CLAUDE_API_KEY
 
 logger = logging.getLogger(__name__)
 
@@ -207,25 +207,26 @@ def _plan_candidate(client: anthropic.Anthropic, post_id: int, category: str,
 
 def plan_candidates(news_list: list[dict], trending: list[str] | None = None,
                     prior_topics: list[str] | None = None) -> list[dict]:
-    """IT 1 + 전자기기 1 + 경제 2 총 4개 후보 제목/키워드/미리보기만 선정. 본문은 미작성."""
-    logger.info("Claude API로 후보 선정 시작 (Haiku) - 제목/키워드만")
+    """오늘 스케줄 카테고리 기반으로 후보 제목/키워드 선정. 본문은 미작성."""
+    from agents.news_collector import get_today_schedule
+    schedule = get_today_schedule()
+    schedule_str = ", ".join(f"{cat}×{cnt}" for cat, cnt in schedule)
+    logger.info(f"Claude API로 후보 선정 시작 (Haiku) — 오늘 스케줄: {schedule_str}")
     trending = trending or []
     client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
 
-    it_news = _format_news_for_prompt(news_list, "IT")
-    electronics_news = _format_news_for_prompt(news_list, "전자기기")
-    economy_news = _format_news_for_prompt(news_list, "경제")
-
-    plan = (
-        [(i + 1, "IT", it_news) for i in range(IT_COUNT)] +
-        [(IT_COUNT + i + 1, "전자기기", electronics_news) for i in range(ELECTRONICS_COUNT)] +
-        [(IT_COUNT + ELECTRONICS_COUNT + i + 1, "경제", economy_news) for i in range(ECONOMY_COUNT)]
-    )
+    plan = []
+    post_id = 1
+    for category, count in schedule:
+        news_text = _format_news_for_prompt(news_list, category)
+        for _ in range(count):
+            plan.append((post_id, category, news_text))
+            post_id += 1
 
     candidates = []
     used_topics: list[str] = list(prior_topics or [])
+    total = len(plan)
 
-    total = IT_COUNT + ELECTRONICS_COUNT + ECONOMY_COUNT
     for post_id, category, news_text in plan:
         logger.info(f"  [{post_id}/{total}] {category} 후보 선정 중...")
         try:
@@ -274,25 +275,25 @@ def write_single(candidate: dict, news_list: list[dict], trending: list[str] | N
 
 
 def write(news_list: list[dict], trending: list[str] | None = None) -> list[dict]:
-    """IT 1 + 전자기기 1 + 경제 2 총 4개 후보 작성. Haiku 모델 사용."""
+    """오늘 스케줄 카테고리 기반으로 전체 초안 작성. Haiku 모델 사용."""
+    from agents.news_collector import get_today_schedule
+    schedule = get_today_schedule()
     logger.info("Claude API로 글 작성 시작 (Haiku)")
     trending = trending or []
     client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
 
-    it_news = _format_news_for_prompt(news_list, "IT")
-    electronics_news = _format_news_for_prompt(news_list, "전자기기")
-    economy_news = _format_news_for_prompt(news_list, "경제")
-
-    plan = (
-        [(i + 1, "IT", it_news) for i in range(IT_COUNT)] +
-        [(IT_COUNT + i + 1, "전자기기", electronics_news) for i in range(ELECTRONICS_COUNT)] +
-        [(IT_COUNT + ELECTRONICS_COUNT + i + 1, "경제", economy_news) for i in range(ECONOMY_COUNT)]
-    )
+    plan = []
+    post_id = 1
+    for category, count in schedule:
+        news_text = _format_news_for_prompt(news_list, category)
+        for _ in range(count):
+            plan.append((post_id, category, news_text))
+            post_id += 1
 
     candidates = []
     used_topics: list[str] = []
+    total = len(plan)
 
-    total = IT_COUNT + ELECTRONICS_COUNT + ECONOMY_COUNT
     for post_id, category, news_text in plan:
         logger.info(f"  [{post_id}/{total}] {category} 초안 작성 중 (Haiku)...")
         try:
@@ -305,5 +306,6 @@ def write(news_list: list[dict], trending: list[str] | None = None) -> list[dict
         used_topics.append(draft.get("title", f"post{post_id}"))
         logger.info(f"  완료: {draft.get('title', '')[:30]}")
 
-    logger.info(f"글 작성 완료: {len(candidates)}개 (IT {IT_COUNT} + 전자기기 {ELECTRONICS_COUNT} + 경제 {ECONOMY_COUNT}, 모델: Haiku)")
+    schedule_str = ", ".join(f"{cat} {cnt}" for cat, cnt in schedule)
+    logger.info(f"글 작성 완료: {len(candidates)}개 ({schedule_str}, 모델: Haiku)")
     return candidates
