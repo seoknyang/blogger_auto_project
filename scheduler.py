@@ -16,13 +16,15 @@ async def run_daily_pipeline():
     """매일 09:00 KST 실행되는 자동화 파이프라인."""
     logger.info("=== 일일 파이프라인 시작 ===")
     try:
-        # 1. 뉴스 + 트렌딩 키워드 수집
-        logger.info("[1/4] 뉴스 및 트렌딩 키워드 수집 중...")
-        news_list = collect()
+        # 1. 트렌딩 키워드 수집 → 트렌딩 기반 뉴스 수집
+        logger.info("[1/4] 트렌딩 키워드 수집 중...")
+        trending = fetch_trending_keywords()
+
+        logger.info("[1/4] 트렌딩 키워드 기반 뉴스 수집 중...")
+        news_list = collect(trending=trending)
         if not news_list:
             logger.error("뉴스 수집 실패 - 파이프라인 중단")
             return
-        trending = fetch_trending_keywords()
 
         # 2. Claude API로 글 작성
         logger.info("[2/4] 글 작성 중...")
