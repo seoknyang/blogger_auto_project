@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 async def run_daily_pipeline():
-    """매일 10:00 KST 실행되는 자동화 파이프라인."""
+    """매일 10:30 KST 실행되는 자동화 파이프라인."""
     logger.info("=== 일일 파이프라인 시작 ===")
     try:
         # 1. 트렌딩 키워드 수집 → 트렌딩 기반 뉴스 수집
@@ -48,11 +48,11 @@ async def run_daily_pipeline():
 
 
 def create_scheduler() -> AsyncIOScheduler:
-    """매일 10:00 KST에 파이프라인을 실행하는 스케줄러 생성."""
+    """매일 10:30 KST에 파이프라인을 실행하는 스케줄러 생성."""
     scheduler = AsyncIOScheduler()
     scheduler.add_job(
         run_daily_pipeline,
-        trigger=CronTrigger(hour=10, minute=0, timezone="Asia/Seoul"),
+        trigger=CronTrigger(hour=10, minute=30, timezone="Asia/Seoul"),
         id="daily_pipeline",
         name="일일 블로그 자동화",
         replace_existing=True,
