@@ -35,6 +35,68 @@ HTML formatting rules (MUST follow):
 - Use <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;"> between major sections to visually separate them
 - Do NOT make entire paragraphs colored — only labels/keywords get color styling"""
 
+# 카테고리별 추가 작성 지침
+_CATEGORY_EXTRA = {
+    "전자기기": (
+        "ELECTRONICS STRATEGY (MUST apply for 전자기기 category):\n"
+        "- Always include a dedicated price comparison section: list at least 3 models with exact Korean market prices (원화).\n"
+        "- Provide 가성비 verdict: which model wins per budget tier (예: 30만원 이하, 50만원대, 100만원 이상).\n"
+        "- When introducing each specific product model, place a [PRODUCT_IMAGE: 정확한제품명] placeholder"
+        " immediately after the product's h3 heading. Example:\n"
+        "  <h3>✅ 삼성 갤럭시북4 엣지</h3>[PRODUCT_IMAGE: 삼성 갤럭시북4 엣지]<p>설명...</p>\n"
+        "  The placeholder will be replaced with the actual product image automatically.\n"
+        "- When comparing 2+ products, MUST include an HTML spec comparison table in this exact format"
+        " (use single quotes for all HTML attributes — double quotes break JSON):\n"
+        "  <table style='width:100%;border-collapse:collapse;margin:16px 0;'>\n"
+        "    <thead><tr style='background:#1a73e8;color:#fff;'>\n"
+        "      <th style='padding:8px 12px;text-align:left;'>항목</th>\n"
+        "      <th style='padding:8px 12px;text-align:center;'>제품A명</th>\n"
+        "      <th style='padding:8px 12px;text-align:center;'>제품B명</th>\n"
+        "    </tr></thead>\n"
+        "    <tbody>\n"
+        "      <tr style='border-bottom:1px solid #e0e0e0;'>\n"
+        "        <td style='padding:8px 12px;font-weight:bold;'>가격</td>\n"
+        "        <td style='padding:8px 12px;text-align:center;'>XXX원</td>\n"
+        "        <td style='padding:8px 12px;text-align:center;'>XXX원</td>\n"
+        "      </tr>\n"
+        "    </tbody>\n"
+        "  </table>\n"
+        "  Include rows for: 가격, 주요 스펙(CPU/RAM/저장공간 등), 배터리/디스플레이, 장점, 단점\n"
+        "- Include a '이런 분께 추천' section mapping user types (대학생, 직장인, 크리에이터, 게이머 등) to specific models with one-line reasons.\n"
+        "- Where relevant, mention major Korean retailers (쿠팡, 네이버쇼핑, 다나와) and note if any deals or seasonal sales apply.\n"
+        "- Avoid pure news recap — the value is in the structured price/spec comparison, not the event itself."
+    ),
+}
+
+
+def _inject_product_images(content_html: str) -> str:
+    """[PRODUCT_IMAGE: 제품명] 플레이스홀더를 네이버쇼핑 실제 이미지로 교체."""
+    import re
+    from agents.price_fetcher import fetch_product_image
+
+    pattern = re.compile(r'\[PRODUCT_IMAGE:\s*([^\]]+)\]')
+    seen: set[str] = set()
+
+    def replace(match: re.Match) -> str:
+        name = match.group(1).strip()
+        if name in seen:
+            return ""
+        seen.add(name)
+        url = fetch_product_image(name)
+        if not url:
+            logger.warning(f"  제품 이미지 없음: {name}")
+            return ""
+        logger.info(f"  제품 이미지 교체: {name}")
+        return (
+            f'<div style="text-align:center;margin:16px 0;">'
+            f'<img src="{url}" alt="{name}" '
+            f'style="max-width:320px;width:100%;height:auto;border-radius:8px;'
+            f'border:1px solid #e0e0e0;box-shadow:0 2px 6px rgba(0,0,0,0.1);"/>'
+            f'</div>'
+        )
+
+    return pattern.sub(replace, content_html)
+
 PLAN_PROMPT_TEMPLATE = """Select the best blog post topic for the {category} category based on the following news.
 Prioritize topics overlapping with trending keywords. If no overlap, pick the most interesting topic.
 
@@ -48,6 +110,7 @@ News data:
 
 Already used topics (do NOT overlap): {used_topics}
 
+{category_extra}
 Respond with JSON only (no other text):
 {{
   "id": {post_id},
@@ -69,10 +132,11 @@ News data:
 
 Already used topics (do NOT overlap): {used_topics}
 
+{category_extra}
 IMPORTANT content guidelines:
 - If the topic involves products (laptops, phones, tablets, etc.): name at least 3 specific models with approximate Korean market prices and key pros/cons of each.
 - If the topic is a comparison/recommendation: give a clear verdict per use case (e.g., 대학생 → XX, 직장인 → YY).
-- If the topic is IT/economy news: explain the real-world impact on Korean consumers and give practical advice.
+- If the topic is economy news: explain the real-world impact on Korean consumers and give practical advice.
 - Do NOT just describe what exists — offer practical suggestions and recommendations readers can consider for their situation.
 
 HTML formatting (MUST apply):
@@ -108,10 +172,13 @@ Trending keywords in Korea right now:
 Reference news (background only, do NOT copy verbatim):
 {news_data}
 
+{price_data}
+
+{category_extra}
 Content guidelines:
 - If topic involves products: name at least 3 specific models with Korean market prices and pros/cons.
 - If comparison/recommendation: give verdict per use case (대학생, 직장인, 크리에이터 등).
-- If IT/economy news: explain real-world impact on Korean consumers with practical advice.
+- If economy news: explain real-world impact on Korean consumers with practical advice.
 - Body must be at least 1000 Korean characters.
 - Use h2/h3 subheadings, end with a soft recommendation or takeaway using suggestive tone (e.g., "~해보시는 것도 좋을 것 같습니다", "~을 추천드립니다"), not imperative commands.
 
@@ -195,6 +262,7 @@ def _write_draft(client: anthropic.Anthropic, post_id: int, category: str,
         news_data=news_text,
         used_topics=", ".join(used_topics) if used_topics else "없음",
         trending=", ".join(trending) if trending else "없음",
+        category_extra=_CATEGORY_EXTRA.get(category, ""),
     )
     message = client.messages.create(
         model=HAIKU_MODEL,
@@ -217,6 +285,7 @@ def _plan_candidate(client: anthropic.Anthropic, post_id: int, category: str,
         news_data=news_text,
         used_topics=", ".join(used_topics) if used_topics else "없음",
         trending=", ".join(trending) if trending else "없음",
+        category_extra=_CATEGORY_EXTRA.get(category, ""),
     )
     message = client.messages.create(
         model=HAIKU_MODEL,
@@ -276,8 +345,21 @@ def write_single(candidate: dict, news_list: list[dict], trending: list[str] | N
 
     from datetime import date
     current_date = date.today().strftime("%Y-%m-%d")
-    category = candidate.get("category", "IT")
+    category = candidate.get("category", "")
     news_text = _format_news_for_prompt(news_list, category)
+
+    # 전자기기 카테고리: 네이버쇼핑 실시간 가격 조회
+    price_data_text = ""
+    if category == "전자기기":
+        from agents.price_fetcher import fetch_prices, format_price_context
+        keywords = candidate.get("keywords", [])
+        logger.info(f"  네이버쇼핑 가격 조회: {keywords}")
+        price_data = fetch_prices(keywords, display=3)  # noqa: F841
+        price_data_text = format_price_context(price_data)
+        if price_data_text:
+            logger.info("  실시간 가격 데이터 프롬프트 주입 완료")
+        else:
+            logger.warning("  가격 데이터 없음 — 모델 자체 지식으로 작성")
 
     user_prompt = WRITE_PROMPT_TEMPLATE.format(
         current_date=current_date,
@@ -287,6 +369,8 @@ def write_single(candidate: dict, news_list: list[dict], trending: list[str] | N
         keywords=", ".join(candidate.get("keywords", [])),
         news_data=news_text,
         trending=", ".join(trending) if trending else "없음",
+        price_data=price_data_text,
+        category_extra=_CATEGORY_EXTRA.get(category, ""),
     )
     message = client.messages.create(
         model=HAIKU_MODEL,
@@ -295,6 +379,11 @@ def write_single(candidate: dict, news_list: list[dict], trending: list[str] | N
         messages=[{"role": "user", "content": user_prompt}],
     )
     result = _parse_json(message.content[0].text.strip())
+
+    # 전자기기: [PRODUCT_IMAGE: 제품명] 플레이스홀더를 실제 이미지로 교체
+    if category == "전자기기":
+        result["content_html"] = _inject_product_images(result.get("content_html", ""))
+
     logger.info(f"글 작성 완료: {result.get('title', '')[:30]}")
     return result
 

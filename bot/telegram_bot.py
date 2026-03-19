@@ -63,13 +63,16 @@ async def _handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if not thumbnail_url and candidate.get("thumbnail_path"):
                 thumbnail_url = upload_to_imgbb(candidate["thumbnail_path"])
 
-            # 2. 본문 각 소제목(h2)마다 이미지 삽입 (썸네일과 중복 제외)
-            await edit_msg(f"⏳ {candidate['title']}\n\n본문 이미지 삽입 중...")
-            content_html = inject_content_images(
-                candidate["content_html"],
-                candidate["title"],
-                used_urls=used_urls,
-            )
+            # 2. 본문 이미지 삽입 — 전자기기는 네이버쇼핑 제품사진이 이미 삽입돼 있으므로 Pexels 생략
+            if candidate.get("category") == "전자기기":
+                content_html = candidate["content_html"]
+            else:
+                await edit_msg(f"⏳ {candidate['title']}\n\n본문 이미지 삽입 중...")
+                content_html = inject_content_images(
+                    candidate["content_html"],
+                    candidate["title"],
+                    used_urls=used_urls,
+                )
 
             await edit_msg(f"⏳ {candidate['title']}\n\n발행 중...")
             post = publish_post(
