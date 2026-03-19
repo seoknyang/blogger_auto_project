@@ -22,6 +22,7 @@ Rules:
 2. Use news only as background; write as if giving advice to a friend
 3. Mention specific products/models/brands available in Korea where relevant
 4. Write SEO-optimized titles (30-50 Korean characters)
+CRITICAL — Do NOT hallucinate specific local businesses: NEVER invent restaurant names, cafe names, shop names, or store names that you are not 100% certain exist. For location-based posts (맛집, 카페, 쇼핑몰 입점 매장 등), only mention well-known national chains (예: 스타벅스, 맥도날드, 올리브영 등) or use general descriptions (예: "파스타 전문점", "디저트 카페") instead of fabricating specific names. If you cannot verify a business name, do NOT include it.
 5. Use HTML format (Blogger-compatible) — every paragraph must be wrapped in <p> tags, never bare text
 6. Body must be at least 1000 Korean characters
 7. Structure with subheadings (h2, h3) — add a relevant emoji at the start of each h2/h3 (e.g., 💡 📌 🔍 ✅ 🏆 📊 💰 🛒 ⚡)
@@ -223,7 +224,7 @@ Keywords: {keywords}
 Trending keywords in Korea right now:
 {trending}
 
-Reference news (background only, do NOT copy verbatim):
+Reference news (background only, do NOT copy verbatim — if empty, use your own knowledge):
 {news_data}
 
 {price_data}
@@ -262,6 +263,17 @@ def _format_news_for_prompt(news_list: list[dict], category: str) -> str:
         [n for n in news_list if n["category"] == category], 1
     ):
         published = news.get("published", "")[:10]  # YYYY-MM-DD
+        lines.append(f"[{i}] ({published}) {news['title']}")
+        if news.get("summary"):
+            lines.append(f"    요약: {news['summary']}")
+    return "\n".join(lines)
+
+
+def _format_news_nofilter(news_list: list[dict]) -> str:
+    """카테고리 필터 없이 뉴스 목록 포맷 (키워드 검색 결과용)."""
+    lines = []
+    for i, news in enumerate(news_list, 1):
+        published = news.get("published", "")[:10]
         lines.append(f"[{i}] ({published}) {news['title']}")
         if news.get("summary"):
             lines.append(f"    요약: {news['summary']}")
@@ -353,6 +365,68 @@ def _plan_candidate(client: anthropic.Anthropic, post_id: int, category: str,
 
 
 
+TRENDING_PLAN_PROMPT_TEMPLATE = """오늘 한국에서 실시간으로 인기 검색되는 키워드 목록에서 블로그 글로 쓸 주제 {count}개를 선정해 주세요.
+
+오늘 날짜: {current_date}
+
+실시간 인기 검색어 (인기 순):
+{trending}
+
+이미 발행한 주제 (중복 금지): {used_topics}
+
+선정 기준:
+- 한국 독자에게 실질적으로 유용한 정보를 줄 수 있는 키워드 우선
+- 카테고리는 키워드 주제에 맞게 자유롭게 지정 (예: IT, 경제, 건강, 연예, 스포츠, 정치, 사회, 생활정보 등 제한 없음)
+- SEO에 최적화된 한국어 제목 (30~50자)
+
+반드시 제외할 주제 (검증 불가 — 선정 금지):
+- 맛집 추천, 카페 추천, 음식점 리뷰 (특정 가게명 검증 불가)
+- 쇼핑몰/백화점 입점 매장 추천 (스타필드, 롯데몰 등 특정 점포)
+- 여행지 현장 정보, 관광 명소 추천 (현장 상황 변동 큼)
+- 특정 동네/지역 로컬 상점 정보
+
+JSON 배열만 반환 (다른 텍스트 없이):
+[
+  {{"id": 1, "title": "SEO 최적화 제목", "category": "자유 카테고리", "keywords": ["kw1", "kw2", "kw3"]}},
+  {{"id": 2, "title": "SEO 최적화 제목", "category": "자유 카테고리", "keywords": ["kw1", "kw2", "kw3"]}}
+]"""
+
+
+def plan_candidates_from_trending(trending: list[str], prior_topics: list[str] | None = None,
+                                  count: int = 4) -> list[dict]:
+    """구글 트렌드 실시간 인기 검색어에서 직접 블로그 후보 선정. 카테고리 제한 없음."""
+    from datetime import date
+    logger.info(f"트렌딩 키워드 기반 후보 선정 (Haiku) — {len(trending)}개 키워드 → {count}개 후보")
+    client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
+    current_date = date.today().strftime("%Y-%m-%d")
+
+    user_prompt = TRENDING_PLAN_PROMPT_TEMPLATE.format(
+        count=count,
+        current_date=current_date,
+        trending="\n".join(f"{i+1}. {kw}" for i, kw in enumerate(trending)),
+        used_topics=", ".join(prior_topics) if prior_topics else "없음",
+    )
+
+    try:
+        message = client.messages.create(
+            model=HAIKU_MODEL,
+            max_tokens=1024,
+            system=SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": user_prompt}],
+        )
+        result = _parse_json(message.content[0].text.strip())
+        candidates = result if isinstance(result, list) else [result]
+        for i, c in enumerate(candidates, 1):
+            c["id"] = i
+        logger.info(f"후보 선정 완료: {len(candidates)}개")
+        for c in candidates:
+            logger.info(f"  [{c['id']}] [{c.get('category', '')}] {c.get('title', '')[:30]}")
+        return candidates
+    except Exception as e:
+        logger.error(f"트렌딩 후보 선정 실패: {e}")
+        return []
+
+
 def plan_candidates(news_list: list[dict], trending: list[str] | None = None,
                     prior_topics: list[str] | None = None) -> list[dict]:
     """오늘 스케줄 카테고리 기반으로 후보 제목/키워드 선정. 본문은 미작성."""
@@ -400,7 +474,12 @@ def write_single(candidate: dict, news_list: list[dict], trending: list[str] | N
     from datetime import date
     current_date = date.today().strftime("%Y-%m-%d")
     category = candidate.get("category", "")
-    news_text = _format_news_for_prompt(news_list, category)
+    # 후보에 키워드 검색 뉴스가 있으면 우선 사용, 없으면 카테고리 뉴스 사용
+    if candidate.get("news_list"):
+        news_text = _format_news_nofilter(candidate["news_list"])
+        logger.info(f"  키워드 검색 뉴스 {len(candidate['news_list'])}개 사용")
+    else:
+        news_text = _format_news_for_prompt(news_list, category)
 
     # 전자기기 카테고리: 네이버쇼핑 실시간 가격 조회
     price_data_text = ""

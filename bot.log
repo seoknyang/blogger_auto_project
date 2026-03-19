@@ -3191,3 +3191,492 @@ Traceback (most recent call last):
   File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
     raise exception
 telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-19 10:36:59,244 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-19 10:37:00,540 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-19 10:37:00,540 [INFO] telegram.ext.Application - Application started
+2026-03-19 10:37:00,812 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-19 10:37:00,812 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-19 10:37:00,812 [INFO] scheduler - [1/2] 구글 트렌드 실시간 인기 검색어 수집 중...
+2026-03-19 10:37:01,415 [INFO] agents.news_collector - 트렌딩 키워드 0개 수집: ...
+2026-03-19 10:37:01,416 [ERROR] scheduler - 트렌딩 키워드 수집 실패 - 파이프라인 중단
+2026-03-19 10:37:01,419 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-19 10:37:01,419 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-19 10:37:01,419 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-19 10:37:01,420 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-19 10:37:01,420 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-19 10:37:06,459 [ERROR] telegram.ext.Updater - Exception happened while polling for updates.
+Traceback (most recent call last):
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-19 10:37:12,620 [ERROR] telegram.ext.Updater - Exception happened while polling for updates.
+Traceback (most recent call last):
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-19 10:37:20,193 [ERROR] telegram.ext.Updater - Exception happened while polling for updates.
+Traceback (most recent call last):
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-19 10:37:26,547 [ERROR] telegram.ext.Updater - Exception happened while polling for updates.
+Traceback (most recent call last):
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-19 10:37:36,165 [ERROR] telegram.ext.Updater - Exception happened while polling for updates.
+Traceback (most recent call last):
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-19 10:37:50,306 [ERROR] telegram.ext.Updater - Exception happened while polling for updates.
+Traceback (most recent call last):
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-19 10:38:11,089 [ERROR] telegram.ext.Updater - Exception happened while polling for updates.
+Traceback (most recent call last):
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 161, in network_retry_loop
+    await do_action()
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_utils\networkloop.py", line 154, in do_action
+    action_cb_task.result()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_updater.py", line 340, in polling_action_cb
+    updates = await self.bot.get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 671, in get_updates
+    updates = await super().get_updates(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 4860, in get_updates
+    await self._post(
+    ^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    ),
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 703, in _post
+    return await self._do_post(
+           ^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\ext\_extbot.py", line 369, in _do_post
+    return await super()._do_post(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\_bot.py", line 732, in _do_post
+    result = await request.post(
+             ^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 198, in post
+    result = await self._request_wrapper(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+    )
+    ^
+  File "C:\Users\seokn\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\telegram\request\_baserequest.py", line 375, in _request_wrapper
+    raise exception
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2026-03-19 10:38:15,430 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-19 10:39:23,871 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-19 10:39:25,190 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-19 10:39:25,191 [INFO] telegram.ext.Application - Application started
+2026-03-19 10:39:25,453 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-19 10:39:25,454 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-19 10:39:25,454 [INFO] scheduler - [1/2] 구글 트렌드 실시간 인기 검색어 수집 중...
+2026-03-19 10:39:26,188 [INFO] agents.news_collector - 트렌딩 키워드 0개 수집: ...
+2026-03-19 10:39:26,188 [ERROR] scheduler - 트렌딩 키워드 수집 실패 - 파이프라인 중단
+2026-03-19 10:39:26,191 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-19 10:39:26,191 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-19 10:39:26,191 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-19 10:39:26,191 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-19 10:39:26,191 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-19 10:39:34,889 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-19 10:45:24,517 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-19 10:45:25,853 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-19 10:45:25,854 [INFO] telegram.ext.Application - Application started
+2026-03-19 10:45:26,111 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-19 10:45:26,112 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-19 10:45:26,112 [INFO] scheduler - [1/2] 구글 트렌드 실시간 인기 검색어 수집 중...
+2026-03-19 10:45:27,052 [INFO] agents.news_collector - 트렌딩 키워드 10개 수집: 대우건설, 한준호, 도깨비, 미세먼지, 달러 원 환율...
+2026-03-19 10:45:27,052 [INFO] scheduler -   수집된 키워드: 대우건설, 한준호, 도깨비, 미세먼지, 달러 원 환율...
+2026-03-19 10:45:27,052 [INFO] scheduler - [2/2] 트렌딩 기반 블로그 후보 선정 중...
+2026-03-19 10:45:27,053 [INFO] scheduler -   최근 30일 발행 이력 4개 제외 적용
+2026-03-19 10:45:27,053 [INFO] agents.content_writer - 트렌딩 키워드 기반 후보 선정 (Haiku) — 10개 키워드 → 4개 후보
+2026-03-19 10:45:30,706 [INFO] agents.content_writer - 후보 선정 완료: 4개
+2026-03-19 10:45:30,706 [INFO] agents.content_writer -   [1] [생활정보] 미세먼지 심한 날씨, 공기청정기·마스크 제품 선택법
+2026-03-19 10:45:30,707 [INFO] agents.content_writer -   [2] [경제] 달러 환율 상승장에서 직장인의 현명한 자산관리법
+2026-03-19 10:45:30,707 [INFO] agents.content_writer -   [3] [IT] 메타, AI 이미지 생성 신서비스 출시·실제 사용 후기
+2026-03-19 10:45:30,707 [INFO] agents.content_writer -   [4] [생활정보] 스타필드 쇼핑 팁·가는 길·맛집, 한눈에 정리
+2026-03-19 10:45:30,707 [INFO] scheduler - [3/3] 텔레그램 발송 중...
+2026-03-19 10:45:32,271 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-19 10:45:32,273 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-19 10:45:32,283 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-19 10:45:32,283 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-19 10:45:32,284 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-19 10:45:32,284 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-19 10:45:32,284 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-19 10:46:13,378 [INFO] agents.content_writer - 글 작성 시작: 스타필드 쇼핑 팁·가는 길·맛집, 한눈에 정리
+2026-03-19 10:47:09,009 [INFO] agents.content_writer - 글 작성 완료: 스타필드 쇼핑·맛집·가는 길 완벽 가이드
+2026-03-19 10:47:11,482 [INFO] agents.image_generator - 썸네일 이미지 검색 중 (Pexels): Starfield shopping guide, Korean shopping mall, Starfield restaurants, Starfield directions, Seoul shopping destination
+2026-03-19 10:47:16,601 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/XZNbjRLb/e43bebc04dd3.jpg
+2026-03-19 10:47:19,229 [INFO] agents.image_generator - 본문 이미지 [1/7] 검색 중 (Pexels): shopping mall, Starfield stores, retail shopping, shopping guide, Korean department store
+2026-03-19 10:47:23,312 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/M0yH2HV/c307924b9237.jpg
+2026-03-19 10:47:24,915 [INFO] agents.image_generator - 본문 이미지 [2/7] 검색 중 (Pexels): Starfield shopping mall, directions to Starfield, Goyang Coex Hanam, Korean shopping guide, Starfield location
+2026-03-19 10:47:31,780 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/sphbPvVQ/4653a6a62ac7.jpg
+2026-03-19 10:47:32,941 [INFO] agents.image_generator - 본문 이미지 [3/7] 검색 중 (Pexels): luxury shopping, designer brands, Starfield mall, shopping guide, fashion tips
+2026-03-19 10:47:38,065 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/BVkXHpSV/2c665081142b.jpg
+2026-03-19 10:47:39,322 [INFO] agents.image_generator - 본문 이미지 [4/7] 검색 중 (Pexels): Starfield restaurant, Korean dining, cafe, shopping district, food recommendations
+2026-03-19 10:47:44,121 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/9mTwhQVc/b821708180c1.jpg
+2026-03-19 10:47:45,892 [INFO] agents.image_generator - 본문 이미지 [5/7] 검색 중 (Pexels): efficient shopping route, time management, shopping mall guide, Starfield shopping, store layout optimization
+2026-03-19 10:47:51,162 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/yBsVKRB8/016adea8cb9a.jpg
+2026-03-19 10:47:52,443 [INFO] agents.image_generator - 본문 이미지 [6/7] 검색 중 (Pexels): Starfield shopping guide, Korean shopping mall, dining at Starfield, Starfield directions, checklist before visiting
+2026-03-19 10:47:56,590 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/N6fjnwSP/c7a493b46041.jpg
+2026-03-19 10:47:57,877 [INFO] agents.image_generator - 본문 이미지 [7/7] 검색 중 (Pexels): shopping mall, guide, starfield, organized, retail
+2026-03-19 10:48:02,588 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/wrbSbLbD/f0770836b282.jpg
+2026-03-19 10:48:02,590 [INFO] agents.image_generator - 본문 이미지 삽입 완료: 7/7개
+2026-03-19 10:48:04,116 [INFO] publisher.blogger - 토큰 갱신 완료
+2026-03-19 10:48:04,118 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-19 10:48:06,560 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/blog-post_565.html
+2026-03-19 10:48:07,015 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/blog-post_565.html
+2026-03-19 10:56:04,378 [INFO] __main__ - KeyboardInterrupt - 종료
+2026-03-19 10:56:41,086 [INFO] __main__ - 블로그 자동화 봇 시작
+2026-03-19 10:56:42,453 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-19 10:56:42,454 [INFO] telegram.ext.Application - Application started
+2026-03-19 10:56:42,714 [INFO] __main__ - 테스트 모드: 파이프라인 즉시 실행
+2026-03-19 10:56:42,715 [INFO] scheduler - === 일일 파이프라인 시작 ===
+2026-03-19 10:56:42,715 [INFO] scheduler - [1/2] 구글 트렌드 실시간 인기 검색어 수집 중...
+2026-03-19 10:56:43,663 [INFO] agents.news_collector - 트렌딩 키워드 10개 수집: 대우건설, 한준호, 도깨비, 미세먼지, 달러 원 환율...
+2026-03-19 10:56:43,664 [INFO] scheduler -   수집된 키워드: 대우건설, 한준호, 도깨비, 미세먼지, 달러 원 환율...
+2026-03-19 10:56:43,664 [INFO] scheduler - [2/2] 트렌딩 기반 블로그 후보 선정 중...
+2026-03-19 10:56:43,671 [INFO] scheduler -   최근 30일 발행 이력 5개 제외 적용
+2026-03-19 10:56:43,671 [INFO] agents.content_writer - 트렌딩 키워드 기반 후보 선정 (Haiku) — 10개 키워드 → 4개 후보
+2026-03-19 10:56:46,868 [INFO] agents.content_writer - 후보 선정 완료: 4개
+2026-03-19 10:56:46,869 [INFO] agents.content_writer -   [1] [경제] 달러 환율 급등, 지금이 환전할 때? 2026년 환율 
+2026-03-19 10:56:46,869 [INFO] agents.content_writer -   [2] [생활정보] 미세먼지 심한 날씨, 공기청정기·마스크 선택 가이드
+2026-03-19 10:56:46,869 [INFO] agents.content_writer -   [3] [투자] 메타 주식·메타버스 투자, 개인투자자가 알아야 할 것
+2026-03-19 10:56:46,869 [INFO] agents.content_writer -   [4] [스포츠] 2026년 MLB 시즌, 한국인 선수와 주목할 팀들
+2026-03-19 10:56:46,869 [INFO] scheduler - [3/4] 후보별 뉴스 검색 중 (그라운딩)...
+2026-03-19 10:56:47,991 [INFO] agents.news_collector - 키워드 뉴스 [달러 원 환율]: 10개
+2026-03-19 10:56:48,905 [INFO] agents.news_collector - 키워드 뉴스 [미세먼지]: 10개
+2026-03-19 10:56:50,170 [INFO] agents.news_collector - 키워드 뉴스 [메타]: 10개
+2026-03-19 10:56:51,121 [INFO] agents.news_collector - 키워드 뉴스 [MLB]: 10개
+2026-03-19 10:56:51,121 [INFO] scheduler - [4/4] 텔레그램 발송 중...
+2026-03-19 10:56:52,545 [INFO] agents.pm_agent - 텔레그램 후보 발송 완료: 4개
+2026-03-19 10:56:52,546 [INFO] scheduler - === 파이프라인 완료 ===
+2026-03-19 10:56:52,549 [INFO] apscheduler.scheduler - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2026-03-19 10:56:52,550 [INFO] apscheduler.scheduler - Added job "일일 블로그 자동화" to job store "default"
+2026-03-19 10:56:52,550 [INFO] apscheduler.scheduler - Scheduler started
+2026-03-19 10:56:52,550 [INFO] __main__ - 스케줄러 시작 (매일 09:00 KST)
+2026-03-19 10:56:52,551 [INFO] __main__ - 봇 실행 중... (Ctrl+C로 종료)
+2026-03-19 10:57:36,183 [INFO] agents.content_writer - 글 작성 시작: 달러 환율 급등, 지금이 환전할 때? 2026년 환율 
+2026-03-19 10:57:36,384 [INFO] agents.content_writer -   키워드 검색 뉴스 10개 사용
+2026-03-19 10:58:09,800 [INFO] agents.content_writer - 글 작성 완료: 달러 환율 1,500원 돌파, 지금 환전하면 손해? 2
+2026-03-19 10:58:12,292 [INFO] agents.image_generator - 썸네일 이미지 검색 중 (Pexels): dollar exchange rate, won depreciation, currency exchange, economic forecast, 2026 outlook
+2026-03-19 10:58:16,776 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/chPNxKc4/06185d377f60.jpg
+2026-03-19 10:58:19,011 [INFO] agents.image_generator - 본문 이미지 [1/5] 검색 중 (Pexels): dollar strength, won exchange rate, currency depreciation, forex market, dollar outlook 2026
+2026-03-19 10:58:23,101 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/vyfQGRD/c24ba9144503.jpg
+2026-03-19 10:58:24,771 [INFO] agents.image_generator - 본문 이미지 [2/5] 검색 중 (Pexels): exchange rate forecast, dollar won 2026, currency outlook, won depreciation, forex prediction
+2026-03-19 10:58:29,477 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/CKBkV3HN/1dfceb18ce98.jpg
+2026-03-19 10:58:31,812 [INFO] agents.image_generator - 본문 이미지 [3/5] 검색 중 (Pexels): currency exchange rates, Korean won dollar, personal investment, foreign exchange, financial decision making
+2026-03-19 10:58:36,998 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/V0JDFPXV/50b3777f8ee4.jpg
+2026-03-19 10:58:38,532 [INFO] agents.image_generator - 본문 이미지 [4/5] 검색 중 (Pexels): dollar exchange rate, currency conversion tips, won dollar forecast, practical finance advice, forex timing strategy
+2026-03-19 10:58:42,303 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/Y49cB2Rm/816fdd910462.jpg
+2026-03-19 10:58:43,652 [INFO] agents.image_generator - 본문 이미지 [5/5] 검색 중 (Pexels): currency exchange timing, dollar rate forecast, when to exchange currency, personal financial needs, exchange rate strategy
+2026-03-19 10:58:48,118 [INFO] agents.image_generator - 이미지 업로드 완료: https://i.ibb.co/Y49xVHGh/3dc35d183c6d.jpg
+2026-03-19 10:58:48,119 [INFO] agents.image_generator - 본문 이미지 삽입 완료: 5/5개
+2026-03-19 10:58:49,096 [INFO] googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-03-19 10:58:51,780 [INFO] publisher.blogger - 발행 완료: https://csntechlog.blogspot.com/2026/03/1500-2026.html
+2026-03-19 10:58:52,254 [INFO] bot.telegram_bot - 발행 성공: https://csntechlog.blogspot.com/2026/03/1500-2026.html
+2026-03-19 11:02:01,102 [INFO] __main__ - KeyboardInterrupt - 종료

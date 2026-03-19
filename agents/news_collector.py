@@ -58,7 +58,7 @@ def _deduplicate(news_list: list[dict]) -> list[dict]:
 
 def fetch_trending_keywords(limit: int = 20) -> list[str]:
     """Google Trends 한국 일별 트렌딩 키워드 반환."""
-    url = "https://trends.google.com/trends/trendingsearches/daily/rss?geo=KR"
+    url = "https://trends.google.com/trending/rss?geo=KR"
     try:
         feed = feedparser.parse(url)
         keywords = [entry.get("title", "").strip() for entry in feed.entries[:limit]]
@@ -67,6 +67,20 @@ def fetch_trending_keywords(limit: int = 20) -> list[str]:
         return keywords
     except Exception as e:
         logger.warning(f"트렌딩 키워드 수집 실패: {e}")
+        return []
+
+
+def fetch_news_for_keyword(keyword: str, limit: int = 10) -> list[dict]:
+    """특정 키워드로 구글 뉴스 RSS 검색. 후보 그라운딩용."""
+    import urllib.parse
+    query = urllib.parse.quote(keyword)
+    url = f"https://news.google.com/rss/search?q={query}&hl=ko&gl=KR&ceid=KR:ko"
+    try:
+        results = _parse_feed(url, keyword, limit)
+        logger.info(f"키워드 뉴스 [{keyword}]: {len(results)}개")
+        return results
+    except Exception as e:
+        logger.warning(f"키워드 뉴스 수집 실패 [{keyword}]: {e}")
         return []
 
 
