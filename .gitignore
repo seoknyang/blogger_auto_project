@@ -7,3 +7,4 @@ history.md
 data/
 deploy.md
 published_topics.json
+*.log
