@@ -39,12 +39,15 @@ HTML formatting rules (MUST follow):
 _CATEGORY_EXTRA = {
     "전자기기": (
         "ELECTRONICS STRATEGY (MUST apply for 전자기기 category):\n"
+        "Do NOT write about 멀티탭 — readers are not interested. Focus on consumer electronics and devices.\n"
         "- Always include a dedicated price comparison section: list at least 3 models with exact Korean market prices (원화).\n"
         "- Provide 가성비 verdict: which model wins per budget tier (예: 30만원 이하, 50만원대, 100만원 이상).\n"
-        "- When introducing each specific product model, place a [PRODUCT_IMAGE: 정확한제품명] placeholder"
-        " immediately after the product's h3 heading. Example:\n"
+        "- MANDATORY IMAGE RULE — NO EXCEPTIONS: For EVERY product model introduced under an <h3> heading, "
+        "place [PRODUCT_IMAGE: 정확한브랜드+모델명] IMMEDIATELY after the </h3> closing tag (before any <p>). "
+        "Use the exact brand + model name. Examples:\n"
         "  <h3>✅ 삼성 갤럭시북4 엣지</h3>[PRODUCT_IMAGE: 삼성 갤럭시북4 엣지]<p>설명...</p>\n"
-        "  The placeholder will be replaced with the actual product image automatically.\n"
+        "  <h3>✅ LG 그램 16 2024</h3>[PRODUCT_IMAGE: LG 그램 16 2024]<p>설명...</p>\n"
+        "  <h3>✅ 애플 맥북 에어 M3</h3>[PRODUCT_IMAGE: 애플 맥북 에어 M3]<p>설명...</p>\n"
         "- When comparing 2+ products, MUST include an HTML spec comparison table in this exact format"
         " (use single quotes for all HTML attributes — double quotes break JSON):\n"
         "  <table style='width:100%;border-collapse:collapse;margin:16px 0;'>\n"
@@ -66,27 +69,33 @@ _CATEGORY_EXTRA = {
         "- Where relevant, mention major Korean retailers (쿠팡, 네이버쇼핑, 다나와) and note if any deals or seasonal sales apply.\n"
         "- Avoid pure news recap — the value is in the structured price/spec comparison, not the event itself."
     ),
+    "생활정보": (
+        "LIFE INFO STRATEGY (MUST apply for 생활정보 category):\n"
+        "Look at 'Trending keywords in Korea right now'. From that full list, pick the keyword(s) most relevant "
+        "to practical daily life that Korean readers would find genuinely helpful RIGHT NOW. "
+        "Scope is broad — any daily life domain: 건강/의료, 행정절차, 취업/이직/직장생활, 금융 상식, "
+        "생활 꿀팁, 요리/레시피, 여행 준비, 법률 상식, 육아/교육, 계절 생활정보, 부동산/이사, 복지 혜택 등.\n"
+        "IMPORTANT: Do NOT write a news article. Write a PRACTICAL GUIDE based on what people are searching for:\n"
+        "- Procedure/process topic → numbered steps (1단계, 2단계...)\n"
+        "- Checklist topic → categorized checklist items\n"
+        "- Tips topic → concrete tips with real examples\n"
+        "- Always include: 준비물/필요서류, 주의사항, 예상 비용/시간, 유용한 사이트/앱(정부24, 건강보험공단 등)\n"
+        "- Use warning callout for cautions: "
+        "<div style='background:#fff3cd;border-left:4px solid #ffc107;padding:12px 16px;margin:12px 0;border-radius:4px;'>⚠️ 주의</div>\n"
+        "- End with a quick-reference summary table or checklist.\n"
+        "- Avoid vague general advice — every point must be actionable and specific."
+    ),
 }
 
 
 def _inject_product_images(content_html: str) -> str:
-    """[PRODUCT_IMAGE: 제품명] 플레이스홀더를 네이버쇼핑 실제 이미지로 교체."""
+    """[PRODUCT_IMAGE: 제품명] 플레이스홀더 교체 + h3 태그 fallback 자동 삽입."""
     import re
     from agents.price_fetcher import fetch_product_image
 
-    pattern = re.compile(r'\[PRODUCT_IMAGE:\s*([^\]]+)\]')
     seen: set[str] = set()
 
-    def replace(match: re.Match) -> str:
-        name = match.group(1).strip()
-        if name in seen:
-            return ""
-        seen.add(name)
-        url = fetch_product_image(name)
-        if not url:
-            logger.warning(f"  제품 이미지 없음: {name}")
-            return ""
-        logger.info(f"  제품 이미지 교체: {name}")
+    def make_img_html(name: str, url: str) -> str:
         return (
             f'<div style="text-align:center;margin:16px 0;">'
             f'<img src="{url}" alt="{name}" '
@@ -95,7 +104,52 @@ def _inject_product_images(content_html: str) -> str:
             f'</div>'
         )
 
-    return pattern.sub(replace, content_html)
+    # 1차: [PRODUCT_IMAGE: X] 플레이스홀더 교체
+    pattern = re.compile(r'\[PRODUCT_IMAGE:\s*([^\]]+)\]')
+
+    def replace_placeholder(match: re.Match) -> str:
+        name = match.group(1).strip()
+        seen.add(name.lower())
+        url = fetch_product_image(name)
+        if not url:
+            logger.warning(f"  제품 이미지 없음: {name}")
+            return ""
+        logger.info(f"  제품 이미지 교체: {name}")
+        return make_img_html(name, url)
+
+    content_html = pattern.sub(replace_placeholder, content_html)
+
+    # 2차 fallback: 이미지 div가 없는 h3 태그 뒤에 자동 삽입
+    h3_re = re.compile(r'(<h3[^>]*>)(.*?)(</h3>)', re.DOTALL | re.IGNORECASE)
+    already_has_img = re.compile(r'^\s*<div[^>]*text-align\s*:\s*center', re.IGNORECASE)
+
+    parts: list[str] = []
+    last_end = 0
+    for m in h3_re.finditer(content_html):
+        h3_end = m.end()
+        inner = m.group(2)
+        after = content_html[h3_end:h3_end + 120]
+        if already_has_img.match(after):
+            continue  # 이미 이미지 있음
+
+        # 이모지·HTML·번호 등 제거하여 제품명 추출
+        name = re.sub(r'<[^>]+>', '', inner).strip()
+        name = re.sub(r'^[^\uAC00-\uD7A3a-zA-Z0-9]+', '', name).strip()
+        if not name or len(name) < 3 or name.lower() in seen:
+            continue
+
+        url = fetch_product_image(name)
+        if not url:
+            continue
+
+        seen.add(name.lower())
+        logger.info(f"  h3 fallback 이미지 삽입: {name}")
+        parts.append(content_html[last_end:h3_end])
+        parts.append(make_img_html(name, url))
+        last_end = h3_end
+
+    parts.append(content_html[last_end:])
+    return "".join(parts)
 
 PLAN_PROMPT_TEMPLATE = """Select the best blog post topic for the {category} category based on the following news.
 Prioritize topics overlapping with trending keywords. If no overlap, pick the most interesting topic.
